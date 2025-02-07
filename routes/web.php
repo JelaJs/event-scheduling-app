@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantManagerController;
 use App\Http\Middleware\RestaurantManagerMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -8,7 +9,8 @@ Route::view('/', 'home')->name('home');
 
 Route::middleware(['auth', RestaurantManagerMiddleware::class])->group(function() {
 
-    //Route::get('/manager/restaurant', []);
+    Route::get('/manager/restaurant', [RestaurantManagerController::class, 'index'])->name('manager.restaurant.index');
+    Route::post('/manager/restaurant/store', [RestaurantManagerController::class, 'store'])->name('manager.restaurant.store');
 });
 ////////////////////////////////
 //AUTH
