@@ -1,38 +1,8 @@
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
-        <div class="flex items-center">
-          <div class="shrink-0">
-            <img class="size-8" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              <a class="text-white" href="/">Home</a>
-              <a class="text-white" href="/jobs">Restaurants</a>
-              <a class="text-white" href="/contact">Bands</a>
-            </div>
-          </div>
-        </div>
-        @if (Auth::user())     
-            <div class="hidden md:block">
-            <div class="ml-4 flex items-center md:ml-6">
-                <a class="text-white mr-3 p-2 bg-gray-900 rounded-full" href="{{route('login')}}">Book Now</a>
-                <a class="text-white" href="{{route('profile.edit')}}">Username</a>
-                <form action="{{route('logout')}}" method="POST">
-                    @csrf
-                    <button class="text-white ml-2">Logout</button>
-                </form>
-            </div>
-            </div>
-        @else
-            <div>
-                <div>
-                    <a class="text-white" href="{{route('login')}}">Login</a>
-                    <a class="text-white" href="{{route('register')}}">Register</a>
-                    <a class="text-white ml-3 p-2 bg-gray-900 rounded-full" href="{{route('login')}}">Book Now</a>
-                </div>
-            </div>
-        @endif
+        
+        @include('layout.desktop-nav-menu')
         
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->

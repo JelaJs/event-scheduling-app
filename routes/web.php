@@ -1,18 +1,15 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\RestaurantManagerMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::view('/', 'home')->name('home');
 
+Route::middleware(['auth', RestaurantManagerMiddleware::class])->group(function() {
 
-
-
-
-
-
+    //Route::get('/manager/restaurant', []);
+});
 ////////////////////////////////
 //AUTH
 
