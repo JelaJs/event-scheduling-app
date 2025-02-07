@@ -16,6 +16,7 @@
         @if (Auth::user())     
             <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
+                <a class="text-white mr-3 p-2 bg-gray-900 rounded-full" href="{{route('login')}}">Book Now</a>
                 <a class="text-white" href="{{route('profile.edit')}}">Username</a>
                 <form action="{{route('logout')}}" method="POST">
                     @csrf
@@ -28,6 +29,7 @@
                 <div>
                     <a class="text-white" href="{{route('login')}}">Login</a>
                     <a class="text-white" href="{{route('register')}}">Register</a>
+                    <a class="text-white ml-3 p-2 bg-gray-900 rounded-full" href="{{route('login')}}">Book Now</a>
                 </div>
             </div>
         @endif
