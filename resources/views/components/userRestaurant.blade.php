@@ -13,7 +13,7 @@
                 class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md">YouTube</a>
         </div>
         <p class="mt-4 font-semibold">Phone Number: {{ $restaurant->phone_number }}</p>
-        <a target="_blank" href="#" 
+        <a href="{{route('manager.restaurant.edit', $restaurant->id)}}" 
             class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md my-4">Edit Restaurant</a>
     </div>
 </div>

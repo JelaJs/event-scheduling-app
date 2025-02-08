@@ -27,7 +27,6 @@ class RestaurantManagerController extends Controller
     public function store(RestorauntStoreRequest $request) {
 
         if(Restaurants::firstWhere('user_id', Auth::id())) {
-
             return redirect()->route('home');
         }
 
@@ -50,5 +49,46 @@ class RestaurantManagerController extends Controller
         $this->restaurantRepo->store($request, $bcgPath, $imagePaths);
 
         return redirect()->back();
+    }
+
+    public function edit(Restaurants $restaurant) {
+
+        if($restaurant->user_id !== Auth::id()) {
+
+            return redirect()->back();
+        }
+
+        return view('manager.editRestaurant', [
+            'restaurant' => $restaurant
+        ]);
+    }
+
+    public function update(RestorauntStoreRequest $request, Restaurants $restaurant) {
+
+        if($restaurant->user_id !== Auth::id()) {
+
+            return redirect()->back();
+        }
+
+        if($request->hasFile('background_image')) {
+
+            $restaurant->background_image = $request->file('background_image')->store('uploads', 'public');
+        }
+
+        if ($request->hasFile('images')) {
+            $imagePaths = array_map(fn($image) => $image->store('uploads', 'public'), $request->file('images'));
+    
+            $restaurant->image_1 = $imagePaths[0] ?? $restaurant->image_1;
+            $restaurant->image_2 = $imagePaths[1] ?? $restaurant->image_2;
+            $restaurant->image_3 = $imagePaths[2] ?? $restaurant->image_3;
+        }
+
+        $restaurant->fill($request->only([
+            'name', 'description', 'instagram', 'youtube', 'phone_number'
+        ]));
+
+        $restaurant->save();
+
+        return redirect()->route('manager.restaurant.index');
     }
 }

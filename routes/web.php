@@ -11,6 +11,8 @@ Route::middleware(['auth', RestaurantManagerMiddleware::class])->group(function(
 
     Route::get('/manager/restaurant', [RestaurantManagerController::class, 'index'])->name('manager.restaurant.index');
     Route::post('/manager/restaurant/store', [RestaurantManagerController::class, 'store'])->name('manager.restaurant.store');
+    Route::get('/manager/restaurant/edit/{restaurant}', [RestaurantManagerController::class, 'edit'])->name('manager.restaurant.edit');
+    Route::patch('/manager/restaurant/update/{restaurant}', [RestaurantManagerController::class, 'update'])->name('manager.restaurant.update');
 });
 ////////////////////////////////
 //AUTH
