@@ -4,4 +4,8 @@
     @if (! $restaurant)
         @include('components.createRestaurantForm')
     @endif
+
+    @if ($restaurant)
+        @include('components.userRestaurant')
+    @endif
 @endsection

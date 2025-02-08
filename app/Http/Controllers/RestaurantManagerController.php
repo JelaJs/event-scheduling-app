@@ -26,8 +26,6 @@ class RestaurantManagerController extends Controller
 
     public function store(RestorauntStoreRequest $request) {
 
-        //sredi kod, ispisi podatke koje si upisao u bazu, napravi seeder da generise 10 restorana
-
         if(Restaurants::firstWhere('user_id', Auth::id())) {
 
             return redirect()->route('home');
