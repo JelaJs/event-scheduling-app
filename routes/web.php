@@ -13,6 +13,7 @@ Route::middleware(['auth', RestaurantManagerMiddleware::class])->group(function(
     Route::post('/manager/restaurant/store', [RestaurantManagerController::class, 'store'])->name('manager.restaurant.store');
     Route::get('/manager/restaurant/edit/{restaurant}', [RestaurantManagerController::class, 'edit'])->name('manager.restaurant.edit');
     Route::patch('/manager/restaurant/update/{restaurant}', [RestaurantManagerController::class, 'update'])->name('manager.restaurant.update');
+    Route::delete('/manager/restaurant/delete/{restaurant}', [RestaurantManagerController::class, 'delete'])->name('manager.restaurant.delete');
 });
 ////////////////////////////////
 //AUTH

@@ -7,5 +7,7 @@
 
     @if ($restaurant)
         @include('components.userRestaurant')
+
+        @include('components.deleteRestaurantForm')
     @endif
 @endsection

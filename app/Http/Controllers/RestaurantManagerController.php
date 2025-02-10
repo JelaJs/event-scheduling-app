@@ -59,4 +59,13 @@ class RestaurantManagerController extends Controller
 
         return redirect()->route('manager.restaurant.index');
     }
+
+    public function delete(Restaurants $restaurant) {
+
+        if($restaurant->user_id !== Auth::id()) return redirect()->back();
+
+        $restaurant->delete();
+
+        return redirect()->back();
+    }
 }
