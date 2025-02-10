@@ -59,6 +59,15 @@
         >
     </div>
     <div>
+        <label class="block text-gray-700 font-medium mb-2">Address *</label>
+        <input 
+            type="text" 
+            name="address"
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+            placeholder="Address"
+            required>
+    </div>
+    <div>
         <label class="block text-gray-700 font-medium mb-2">Phone Number *</label>
         <input 
             type="text" 

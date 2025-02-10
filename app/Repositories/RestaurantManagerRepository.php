@@ -26,10 +26,9 @@ class RestaurantManagerRepository {
             'description' => $request->description,
             'instagram' => $request->instagram,
             'youtube' => $request->youtube,
-            'phone_number' => $request->phone_number
+            'phone_number' => $request->phone_number,
+            'address' => $request->address
         ]);
-
-        
     }
 
     public function checkAndAssignBcgPath($request) {
@@ -76,7 +75,7 @@ class RestaurantManagerRepository {
     public function fillAndSave($request, $restaurant) {
 
         $restaurant->fill($request->only([
-            'name', 'description', 'instagram', 'youtube', 'phone_number'
+            'name', 'description', 'instagram', 'youtube', 'address', 'phone_number'
         ]));
 
         $restaurant->save();

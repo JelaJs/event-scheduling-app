@@ -24,7 +24,8 @@ class RestorauntStoreRequest extends FormRequest
             'description' => 'required|string|max:500',
             'instagram' => ['nullable', 'string', 'max:256', 'regex:/^(https?:\/\/)?(www\.)?(instagram\.com)\/[A-Za-z0-9_.-]+\/?$/'],
             'youtube' => ['nullable', 'string', 'max:256', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com\/|youtu\.be\/)/'],
-            'phone_number' => 'nullable|string|max:64'
+            'phone_number' => 'nullable|string|max:64',
+            'address' => 'required|max:255'
         ];
     }
 }

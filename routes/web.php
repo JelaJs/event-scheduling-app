@@ -1,19 +1,22 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RestaurantManagerController;
 use App\Http\Middleware\RestaurantManagerMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
+Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants');
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'find'])->name('restaurants.single');
 
-Route::middleware(['auth', RestaurantManagerMiddleware::class])->group(function() {
+Route::controller(RestaurantManagerController::class)->middleware(['auth', RestaurantManagerMiddleware::class])->prefix('/manager/restaurant')->name('manager.restaurant.')->group(function() {
 
-    Route::get('/manager/restaurant', [RestaurantManagerController::class, 'index'])->name('manager.restaurant.index');
-    Route::post('/manager/restaurant/store', [RestaurantManagerController::class, 'store'])->name('manager.restaurant.store');
-    Route::get('/manager/restaurant/edit/{restaurant}', [RestaurantManagerController::class, 'edit'])->name('manager.restaurant.edit');
-    Route::patch('/manager/restaurant/update/{restaurant}', [RestaurantManagerController::class, 'update'])->name('manager.restaurant.update');
-    Route::delete('/manager/restaurant/delete/{restaurant}', [RestaurantManagerController::class, 'delete'])->name('manager.restaurant.delete');
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{restaurant}', 'edit')->name('edit');
+    Route::patch('/update/{restaurant}', 'update')->name('update');
+    Route::delete('/delete/{restaurant}', 'delete')->name('delete');
 });
 ////////////////////////////////
 //AUTH

@@ -18,6 +18,7 @@ class Restaurants extends Model
        'description',
        'instagram',
        'youtube',
-       'phone_number'
+       'phone_number',
+       'address',
     ];
 }

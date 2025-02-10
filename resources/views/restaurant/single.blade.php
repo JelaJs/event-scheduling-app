@@ -1,3 +1,6 @@
+@extends('layout.layout')
+
+@section('content')
 <div class="relative w-full h-[500px] bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $restaurant->background_image) }}');">
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -14,8 +17,6 @@
         </div>
         <p class="mt-4 font-semibold">Phone Number: {{ $restaurant->phone_number }}</p>
         <p class="mt-4 font-semibold">Address: {{ $restaurant->address }}</p>
-        <a href="{{route('manager.restaurant.edit', $restaurant->id)}}" 
-            class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md my-4">Edit Restaurant</a>
     </div>
 </div>
 
@@ -25,3 +26,4 @@
     <img src="{{ asset('storage/' . $restaurant->image_2) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
     <img src="{{ asset('storage/' . $restaurant->image_3) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
 </div>
+@endsection

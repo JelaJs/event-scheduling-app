@@ -2,7 +2,7 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <a class="text-white" href="/">Home</a>
-              <a class="text-white" href="/jobs">Restaurants</a>
+              <a class="text-white" href="{{route('restaurants')}}">Restaurants</a>
               <a class="text-white" href="/contact">Bands</a>
             </div>
           </div>
