@@ -36,7 +36,7 @@ class RestaurantManagerRepository {
 
         if($request->hasFile('background_image')) {
 
-            return $request->file('background_image')->store('uploads', 'public');
+            return $request->file('background_image')->store('uploads/restaurants', 'public');
         }
 
         return null;
@@ -48,7 +48,7 @@ class RestaurantManagerRepository {
 
             foreach ($request->file('images') as $image) {
 
-                $path = $image->store('uploads', 'public');
+                $path = $image->store('uploads/restaurants', 'public');
                 $imagePaths[] = $path;
             }
         }
@@ -58,14 +58,14 @@ class RestaurantManagerRepository {
 
         if($request->hasFile('background_image')) {
 
-            $restaurant->background_image = $request->file('background_image')->store('uploads', 'public');
+            $restaurant->background_image = $request->file('background_image')->store('uploads/restaurants', 'public');
         }
     }
 
     public function checkAndUpdateImgPaths($request, $restaurant) {
 
         if ($request->hasFile('images')) {
-            $imagePaths = array_map(fn($image) => $image->store('uploads', 'public'), $request->file('images'));
+            $imagePaths = array_map(fn($image) => $image->store('uploads/restaurants', 'public'), $request->file('images'));
     
             $restaurant->image_1 = $imagePaths[0] ?? $restaurant->image_1;
             $restaurant->image_2 = $imagePaths[1] ?? $restaurant->image_2;
