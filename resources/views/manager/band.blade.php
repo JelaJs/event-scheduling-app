@@ -7,5 +7,7 @@
 
     @if ($band)
         @include('components.userBand')
+
+        @include('components.deleteBandForm')
     @endif
 @endsection

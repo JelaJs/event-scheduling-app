@@ -56,4 +56,13 @@ class BandManagerController extends Controller
 
         return redirect()->route('manager.band.index');
     }
+
+    public function delete(Bands $band) {
+
+        if($band->user_id !== Auth::id()) return redirect()->back();
+
+        $band->delete();
+
+        return redirect()->back();
+    }
 }

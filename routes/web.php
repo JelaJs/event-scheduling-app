@@ -31,6 +31,7 @@ Route::controller(BandManagerController::class)->middleware(['auth', BandManager
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{band}', 'edit')->name('edit');
     Route::patch('/update/{band}', 'update')->name('update');
+    Route::delete('/delete/{band}', 'delete')->name('delete');
 });
 
 
