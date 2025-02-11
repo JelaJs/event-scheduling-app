@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bands extends Model
 {
-    protected $table = "bands";
+    const TABLE = 'bands';
+    protected $table = self::TABLE;
 
     protected $fillable = [
        'user_id',

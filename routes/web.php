@@ -10,6 +10,8 @@ Route::view('/', 'home')->name('home');
 Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants');
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'find'])->name('restaurants.single');
 
+
+//RESTAURANT MANAGER
 Route::controller(RestaurantManagerController::class)->middleware(['auth', RestaurantManagerMiddleware::class])->prefix('/manager/restaurant')->name('manager.restaurant.')->group(function() {
 
     Route::get('/', 'index')->name('index');
@@ -18,8 +20,13 @@ Route::controller(RestaurantManagerController::class)->middleware(['auth', Resta
     Route::patch('/update/{restaurant}', 'update')->name('update');
     Route::delete('/delete/{restaurant}', 'delete')->name('delete');
 });
+
+
+//BAND MANAGER    //MOgu da dodam u modelima Cnst TABLE = naziv tab i onda u migrations Model::table i u protected $table mogu self::TABLE
+
+
 ////////////////////////////////
-//AUTH
+//PROFILE
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

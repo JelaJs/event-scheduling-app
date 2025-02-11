@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservations extends Model
 {
-    protected $table = "reservations";
+    const TABLE = 'reservations';
+    protected $table = self::TABLE;
 
     protected $fillable = [
        'restaurant_id',
