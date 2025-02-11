@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BandManagerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RestaurantManagerController;
+use App\Http\Middleware\BandManagerMiddleware;
 use App\Http\Middleware\RestaurantManagerMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -22,12 +24,17 @@ Route::controller(RestaurantManagerController::class)->middleware(['auth', Resta
 });
 
 
-//BAND MANAGER    //MOgu da dodam u modelima Cnst TABLE = naziv tab i onda u migrations Model::table i u protected $table mogu self::TABLE
+//BAND MANAGER 
+Route::controller(BandManagerController::class)->middleware(['auth', BandManagerMiddleware::class])->prefix('/manager/band')->name('manager.band.')->group(function() {
+
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+});
+
 
 
 ////////////////////////////////
 //PROFILE
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

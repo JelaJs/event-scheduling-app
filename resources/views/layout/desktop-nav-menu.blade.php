@@ -17,7 +17,7 @@
                 <a class="text-white mr-4" href="{{ route('manager.restaurant.index') }}">Your Restaurant</a>
               @endif
               @if (Auth::user()->role === 'band_manager')
-                <a class="text-white mr-4" href="#">Your Band</a>
+                <a class="text-white mr-4" href="{{route('manager.band.index')}}">Your Band</a>
               @endif
                 <a class="text-white" href="{{route('profile.edit')}}">{{Auth::user()->name}}</a>
                 <form action="{{route('logout')}}" method="POST">

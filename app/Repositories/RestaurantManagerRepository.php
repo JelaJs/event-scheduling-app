@@ -31,40 +31,40 @@ class RestaurantManagerRepository {
         ]);
     }
 
-    public function checkAndAssignBcgPath($request) {
+    public function checkAndAssignBcgPath($request, $repo) {
 
         if($request->hasFile('background_image')) {
 
-            return $request->file('background_image')->store('uploads/restaurants', 'public');
+            return $request->file('background_image')->store("uploads/$repo", 'public');
         }
 
         return null;
     }
 
-    public function checkAndAssingImgPaths($request, &$imagePaths) {
+    public function checkAndAssingImgPaths($request, &$imagePaths, $repo) {
 
         if ($request->hasFile('images')) {
 
             foreach ($request->file('images') as $image) {
 
-                $path = $image->store('uploads/restaurants', 'public');
+                $path = $image->store("uploads/$repo", 'public');
                 $imagePaths[] = $path;
             }
         }
     }
 
-    public function checkAndUpdateRestaurantBcg($request, $restaurant) {
+    public function checkAndUpdateRestaurantBcg($request, $restaurant, $repo) {
 
         if($request->hasFile('background_image')) {
 
-            $restaurant->background_image = $request->file('background_image')->store('uploads/restaurants', 'public');
+            $restaurant->background_image = $request->file('background_image')->store("uploads/$repo", 'public');
         }
     }
 
-    public function checkAndUpdateImgPaths($request, $restaurant) {
+    public function checkAndUpdateImgPaths($request, $restaurant, $repo) {
 
         if ($request->hasFile('images')) {
-            $imagePaths = array_map(fn($image) => $image->store('uploads/restaurants', 'public'), $request->file('images'));
+            $imagePaths = array_map(fn($image) => $image->store("uploads/$repo", 'public'), $request->file('images'));
     
             $restaurant->image_1 = $imagePaths[0] ?? $restaurant->image_1;
             $restaurant->image_2 = $imagePaths[1] ?? $restaurant->image_2;

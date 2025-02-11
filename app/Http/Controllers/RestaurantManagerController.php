@@ -28,10 +28,10 @@ class RestaurantManagerController extends Controller
 
         if(Restaurants::firstWhere('user_id', Auth::id())) return redirect()->route('home');
 
-        $bcgPath = $this->restaurantRepo->checkAndAssignBcgPath($request);
+        $bcgPath = $this->restaurantRepo->checkAndAssignBcgPath($request, 'restaurants');
 
         $imagePaths = [];
-        $this->restaurantRepo->checkAndAssingImgPaths($request, $imagePaths);
+        $this->restaurantRepo->checkAndAssingImgPaths($request, $imagePaths, 'restaurants');
 
         $this->restaurantRepo->store($request, $bcgPath, $imagePaths);
 
@@ -51,9 +51,9 @@ class RestaurantManagerController extends Controller
 
         if($restaurant->user_id !== Auth::id()) return redirect()->back();
 
-        $this->restaurantRepo->checkAndUpdateRestaurantBcg($request, $restaurant);
+        $this->restaurantRepo->checkAndUpdateRestaurantBcg($request, $restaurant, 'restaurants');
 
-        $this->restaurantRepo->checkAndUpdateImgPaths($request, $restaurant);
+        $this->restaurantRepo->checkAndUpdateImgPaths($request, $restaurant, 'restaurants');
 
         $this->restaurantRepo->fillAndSave($request, $restaurant);
 
