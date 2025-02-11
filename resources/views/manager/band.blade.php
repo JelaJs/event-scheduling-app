@@ -6,6 +6,6 @@
     @endif
 
     @if ($band)
-        
+        @include('components.userBand')
     @endif
 @endsection

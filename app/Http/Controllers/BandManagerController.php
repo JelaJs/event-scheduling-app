@@ -36,4 +36,24 @@ class BandManagerController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit(Bands $band) {
+
+        if($band->user_id !== Auth::id()) return redirect()->back();
+
+        return view('manager.editBand', ['band' => $band]);
+    }
+
+    public function update(BandStoreAndUpdateRequest $request, Bands $band) {
+
+        if($band->user_id !== Auth::id()) return redirect()->back();
+
+        $this->bandRepo->checkAndUpdateRestaurantBcg($request, $band, 'bands');
+
+        $this->bandRepo->checkAndUpdateImgPaths($request, $band, 'bands');
+
+        $this->bandRepo->fillAndSaveBand($request, $band);
+
+        return redirect()->route('manager.band.index');
+    }
 }

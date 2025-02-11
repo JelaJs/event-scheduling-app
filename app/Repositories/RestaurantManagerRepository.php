@@ -53,22 +53,22 @@ class RestaurantManagerRepository {
         }
     }
 
-    public function checkAndUpdateRestaurantBcg($request, $restaurant, $repo) {
+    public function checkAndUpdateRestaurantBcg($request, $table, $repo) {
 
         if($request->hasFile('background_image')) {
 
-            $restaurant->background_image = $request->file('background_image')->store("uploads/$repo", 'public');
+            $table->background_image = $request->file('background_image')->store("uploads/$repo", 'public');
         }
     }
 
-    public function checkAndUpdateImgPaths($request, $restaurant, $repo) {
+    public function checkAndUpdateImgPaths($request, $table, $repo) {
 
         if ($request->hasFile('images')) {
             $imagePaths = array_map(fn($image) => $image->store("uploads/$repo", 'public'), $request->file('images'));
     
-            $restaurant->image_1 = $imagePaths[0] ?? $restaurant->image_1;
-            $restaurant->image_2 = $imagePaths[1] ?? $restaurant->image_2;
-            $restaurant->image_3 = $imagePaths[2] ?? $restaurant->image_3;
+            $table->image_1 = $imagePaths[0] ?? $table->image_1;
+            $table->image_2 = $imagePaths[1] ?? $table->image_2;
+            $table->image_3 = $imagePaths[2] ?? $table->image_3;
         }
     }
 
