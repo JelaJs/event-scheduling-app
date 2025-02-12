@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    @if ($restaurants)
+    @if (count($restaurants) > 0)
         <h1 class="text-3xl font-500 mb-6">Restaurants:</h1>
         <div class="flex flex-wrap gap-6">
             @foreach ($restaurants as $restaurant)
@@ -19,5 +19,7 @@
                 </div>
             @endforeach
         </div>        
+    @else
+        <p>No restaurants...</p>
     @endif
 @endsection

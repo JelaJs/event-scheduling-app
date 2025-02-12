@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BandManagerController extends Controller
 {
-    
+
     private $bandRepo;
     public function __construct() {
 
