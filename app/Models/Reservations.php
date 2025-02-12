@@ -25,7 +25,7 @@ class Reservations extends Model
 
     public function restaurant() {
 
-       return $this->hasOne(Restaurants::class, 'id', 'restaurants_id');
+       return $this->hasOne(Restaurants::class, 'id', 'restaurant_id');
     }
 
     public function band() {

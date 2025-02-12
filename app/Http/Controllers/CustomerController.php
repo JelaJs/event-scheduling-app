@@ -6,14 +6,23 @@ use App\Http\Requests\MakeReservationRequest;
 use App\Models\Bands;
 use App\Models\Reservations;
 use App\Models\Restaurants;
+use App\Repositories\ReservationRepository;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
     
+    private $reservationRepo;
+    public function __construct() {
+
+        $this->reservationRepo = new ReservationRepository();
+    }
+
     public function index() {
 
-        $reservations = Reservations::where('customer_id', Auth::id())->get();
+        Reservations::where('reservation_date', '<', date('Y-m-d'))->delete();
+
+        $reservations = Reservations::with('user', 'restaurant', 'band')->where('customer_id', Auth::id())->get();
         $restaurants = Restaurants::all();
         $bands = Bands::all();
 
@@ -26,11 +35,7 @@ class CustomerController extends Controller
 
     public function store(MakeReservationRequest $request) {
 
-        $reservationExists = Reservations::firstWhere([
-            ['reservation_date', $request->reservation_date]
-        ]);
-
-        if($reservationExists) return redirect()->back()->withErrors('You already have a reservation for the current date');
+        if($this->reservationRepo->checkIfReservationExists($request)) return redirect()->back()->withErrors('You already have a reservation for the current date');
 
         Reservations::create([
 
