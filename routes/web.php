@@ -44,7 +44,7 @@ Route::controller(CustomerController::class)->middleware(['auth', CustomerMiddle
 
     Route::get('/', 'index')->name('index');
     Route::post('/store', 'store')->name('store');
-    Route::get('edit', 'edit')->name('edit');
+    Route::get('edit/{reservation}', 'edit')->name('edit');
 });
 
 ////////////////////////////////

@@ -15,12 +15,28 @@ class ReservationRepository {
 
     public function checkIfReservationExists($request) {
 
-        $reservationExists = $this->reservationModel->firstWhere([
+        return $this->reservationModel->firstWhere([
             ['customer_id', Auth::id()],
             ['reservation_date', $request->reservation_date]
         ]);
+    }
 
-        return $reservationExists;
+    public function checkIfRestaurantDateIsBusy($request) {
+
+        return $this->reservationModel->firstWhere([
+            ['restaurant_id', $request->restaurant_id],
+            ['reservation_date', $request->reservation_date],
+            ['restaurant_status', 'approved'] 
+        ]);
+    }
+
+    public function checkIfBandDateIsBudy($request) {
+
+        return $this->reservationModel->firstWhere([
+            ['band_id', $request->band_id],
+            ['reservation_date', $request->reservation_date],
+            ['band_status', 'approved'] 
+        ]);
     }
 
     public function store($request) {

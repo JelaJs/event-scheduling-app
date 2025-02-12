@@ -25,7 +25,11 @@
                     <span class="px-3 py-1 text-sm font-medium rounded-full {{$reservation->restaurant_status == 'pending' ? 'text-yellow-800 bg-yellow-200' : ' text-green-800 bg-green-200'}}">{{$reservation->restaurant_status}}</span>
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">Update</button>
+                    @if($reservation->restaurant_status == 'pending' && $reservation->band_status == 'pending')
+                        <a href="{{route('customer.edit', $reservation->id)}}" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">Update</a>
+                    @else
+                        <p>Disabled</p>
+                    @endif
                 </td>
                 <td class="px-6 py-4 text-center">
                     <button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Delete</button>
