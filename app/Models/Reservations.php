@@ -17,4 +17,19 @@ class Reservations extends Model
        'restaurant_status',
        'band_status'
     ];
+
+    public function user() {
+
+       return $this->hasOne(User::class, 'id', 'customer_id');
+    }
+
+    public function restaurant() {
+
+       return $this->hasOne(Restaurants::class, 'id', 'restaurants_id');
+    }
+
+    public function band() {
+
+        return $this->hasOne(Bands::class, 'id', 'band_id');
+    }
 }

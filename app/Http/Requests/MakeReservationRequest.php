@@ -22,8 +22,8 @@ class MakeReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'restaurant' => 'required|exists:restaurants,id',
-            'band' => 'required|exists:bands,id',
+            'restaurant_id' => 'required|exists:restaurants,id',
+            'band_id' => 'required|exists:bands,id',
             'reservation_date' => 'required|date'
         ];
     }

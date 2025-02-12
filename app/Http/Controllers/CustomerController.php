@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MakeReservationRequest;
-use App\Http\Requests\MakeResrvationRequest;
 use App\Models\Bands;
 use App\Models\Reservations;
 use App\Models\Restaurants;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
@@ -28,6 +26,20 @@ class CustomerController extends Controller
 
     public function store(MakeReservationRequest $request) {
 
-        dd('proso uslov');
+        $reservationExists = Reservations::firstWhere([
+            ['reservation_date', $request->reservation_date]
+        ]);
+
+        if($reservationExists) return redirect()->back()->withErrors('You already have a reservation for the current date');
+
+        Reservations::create([
+
+            'restaurant_id' => $request->restaurant_id,
+            'band_id' => $request->band_id,
+            'customer_id' => Auth::id(),
+            'reservation_date' => $request->reservation_date
+        ]);
+
+        return redirect()->back();
     }
 }
