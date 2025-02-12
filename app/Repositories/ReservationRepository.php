@@ -22,4 +22,15 @@ class ReservationRepository {
 
         return $reservationExists;
     }
+
+    public function store($request) {
+
+        $this->reservationModel->create([
+
+            'restaurant_id' => $request->restaurant_id,
+            'band_id' => $request->band_id,
+            'customer_id' => Auth::id(),
+            'reservation_date' => $request->reservation_date
+        ]);
+    }
 }

@@ -37,13 +37,7 @@ class CustomerController extends Controller
 
         if($this->reservationRepo->checkIfReservationExists($request)) return redirect()->back()->withErrors('You already have a reservation for the current date');
 
-        Reservations::create([
-
-            'restaurant_id' => $request->restaurant_id,
-            'band_id' => $request->band_id,
-            'customer_id' => Auth::id(),
-            'reservation_date' => $request->reservation_date
-        ]);
+        $this->reservationRepo->store($request);
 
         return redirect()->back();
     }
