@@ -11,7 +11,7 @@
             <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
               @if (Auth::user()->role === 'customer')
-              <a class="text-white mr-3 p-2 bg-gray-900 rounded-full" href="{{route('login')}}">Book Now</a>
+              <a class="text-white mr-3 p-2 bg-gray-900 rounded-full" href="{{route('customer.index')}}">Book Now</a>
               @endif
               @if (Auth::user()->role === 'restaurant_manager')
                 <a class="text-white mr-4" href="{{ route('manager.restaurant.index') }}">Your Restaurant</a>

@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\BandController;
 use App\Http\Controllers\BandManagerController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RestaurantManagerController;
 use App\Http\Middleware\BandManagerMiddleware;
+use App\Http\Middleware\CustomerMiddleware;
 use App\Http\Middleware\RestaurantManagerMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,12 @@ Route::controller(BandManagerController::class)->middleware(['auth', BandManager
     Route::delete('/delete/{band}', 'delete')->name('delete');
 });
 
+//CUSTOMER BOOKING
+Route::controller(CustomerController::class)->middleware(['auth', CustomerMiddleware::class])->prefix('/customer')->name('customer.')->group(function() {
 
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+});
 
 ////////////////////////////////
 //PROFILE
