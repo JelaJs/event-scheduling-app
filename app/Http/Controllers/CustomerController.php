@@ -76,4 +76,13 @@ class CustomerController extends Controller
 
         return redirect()->route('customer.index');
     }
+
+    public function delete(Reservations $reservation) {
+
+        if($reservation->customer_id !== Auth::id()) return redirect()->back();
+
+        $reservation->delete();
+
+        return redirect()->back();
+    }
 }

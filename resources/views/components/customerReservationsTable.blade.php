@@ -32,7 +32,11 @@
                     @endif
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Delete</button>
+                    <form action="{{route('customer.delete', $reservation->id)}}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="delete">
+                        <button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
