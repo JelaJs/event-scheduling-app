@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BandStoreAndUpdateRequest;
 use App\Models\Bands;
+use App\Models\Reservations;
 use App\Repositories\BandManagerRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,21 @@ class BandManagerController extends Controller
         if($band->user_id !== Auth::id()) return redirect()->back();
 
         $band->delete();
+
+        return redirect()->back();
+    }
+
+    public function updateReservationStatus(Reservations $reservation, $status) {
+
+        if($reservation->band_status !== 'pending') return redirect()->back();
+
+        if($status !== 'accepted' && $status !== 'rejected') return redirect()->back();
+
+        $band = Bands::firstWhere('id', $reservation->band_id);
+        if($band->user_id !== Auth::id()) return redirect()->back();
+
+        $reservation->band_status = $status;
+        $reservation->save();
 
         return redirect()->back();
     }

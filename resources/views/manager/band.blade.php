@@ -8,6 +8,8 @@
     @if ($band)
         @include('components.userBand')
 
+        @include('components.listBandReservations')
+
         @include('components.deleteBandForm')
     @endif
 @endsection

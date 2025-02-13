@@ -21,4 +21,9 @@ class Bands extends Model
        'youtube',
        'phone_number'
     ];
+
+    public function reservations() {
+
+        return $this->hasMany(Reservations::class, 'band_id', 'id');
+    }
 }

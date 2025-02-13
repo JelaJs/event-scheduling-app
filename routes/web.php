@@ -26,6 +26,7 @@ Route::controller(RestaurantManagerController::class)->middleware(['auth', Resta
     Route::get('/edit/{restaurant}', 'edit')->name('edit');
     Route::patch('/update/{restaurant}', 'update')->name('update');
     Route::delete('/delete/{restaurant}', 'delete')->name('delete');
+    Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
 });
 
 
@@ -37,6 +38,7 @@ Route::controller(BandManagerController::class)->middleware(['auth', BandManager
     Route::get('/edit/{band}', 'edit')->name('edit');
     Route::patch('/update/{band}', 'update')->name('update');
     Route::delete('/delete/{band}', 'delete')->name('delete');
+    Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
 });
 
 //CUSTOMER BOOKING

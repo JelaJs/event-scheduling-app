@@ -22,4 +22,9 @@ class Restaurants extends Model
        'phone_number',
        'address',
     ];
+
+    public function reservations() {
+
+        return $this->hasMany(Reservations::class, 'restaurant_id', 'id');
+    }
 }

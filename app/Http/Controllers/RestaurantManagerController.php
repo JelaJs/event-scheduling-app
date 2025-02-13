@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RestorauntStoreRequest;
+use App\Models\Reservations;
 use App\Models\Restaurants;
 use App\Repositories\RestaurantManagerRepository;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class RestaurantManagerController extends Controller
     
     public function index() {
 
-        $restaurant = Restaurants::firstWhere('user_id', Auth::id());
+        $restaurant = Restaurants::with('reservations')->firstWhere('user_id', Auth::id());
 
         return view('manager.restaurant', ['restaurant' => $restaurant]);
     }
@@ -65,6 +66,21 @@ class RestaurantManagerController extends Controller
         if($restaurant->user_id !== Auth::id()) return redirect()->back();
 
         $restaurant->delete();
+
+        return redirect()->back();
+    }
+
+    public function updateReservationStatus(Reservations $reservation, $status) {
+
+        if($reservation->restaurant_status !== 'pending') return redirect()->back();
+
+        if($status !== 'accepted' && $status !== 'rejected') return redirect()->back();
+
+        $restaurant = Restaurants::firstWhere('id', $reservation->restaurant_id);
+        if($restaurant->user_id !== Auth::id()) return redirect()->back();
+
+        $reservation->restaurant_status = $status;
+        $reservation->save();
 
         return redirect()->back();
     }
