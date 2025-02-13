@@ -26,4 +26,16 @@
     <img src="{{ asset('storage/' . $restaurant->image_2) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
     <img src="{{ asset('storage/' . $restaurant->image_3) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
 </div>
+
+<div class="bg-white p-6 rounded-lg shadow-md my-10">
+    <p class="text-lg font-semibold text-gray-800 mb-3">Reserved Dates:</p>
+    
+    @foreach ($restaurant->reservations as $reservation)
+        @if ($reservation->restaurant_status === 'accepted')
+            <p class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg mb-2">
+                {{ $reservation->reservation_date }}
+            </p>
+        @endif
+    @endforeach
+</div>
 @endsection
