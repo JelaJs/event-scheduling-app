@@ -8,6 +8,7 @@ use App\Models\Reservations;
 use App\Models\Restaurants;
 use App\Repositories\ReservationRepository;
 use Illuminate\Support\Facades\Auth;
+use Request;
 
 class CustomerController extends Controller
 {
@@ -39,7 +40,7 @@ class CustomerController extends Controller
 
         if($this->reservationRepo->checkIfRestaurantDateIsBusy($request)) return redirect()->back()->withErrors('Restaurant is busy for current date');
 
-        if($this->reservationRepo->checkIfBandDateIsBudy($request)) return redirect()->back()->withErrors('Band is busy for current date.');
+        if($this->reservationRepo->checkIfBandDateIsBusy($request)) return redirect()->back()->withErrors('Band is busy for current date.');
         
         $this->reservationRepo->store($request);
 
@@ -48,7 +49,7 @@ class CustomerController extends Controller
 
     public function edit(Reservations $reservation) {
 
-        if($reservation->customer_id !== Auth::id()) return redirect()->back();
+       if($reservation->customer_id !== Auth::id()) return redirect()->back();
         $restaurants = Restaurants::all();
         $bands = Bands::all();
 
@@ -57,5 +58,22 @@ class CustomerController extends Controller
             'restaurants' => $restaurants,
             'bands' => $bands,
         ]);
+    }
+
+    public function update(MakeReservationRequest $request, Reservations $reservation) {
+
+        if($reservation->customer_id !== Auth::id()) return redirect()->back();
+
+        if(!$this->reservationRepo->checkIfStatusIsPending($reservation)) return redirect()->back()->withErrors("You can't make change at this point");
+
+        if($this->reservationRepo->checkIfChangedReservationExists($request, $reservation)) return redirect()->back()->withErrors('You already have a reservation for the current date');
+
+        if($this->reservationRepo->checkIfRestaurantDateIsBusy($request)) return redirect()->back()->withErrors('Restaurant is busy for current date');
+
+        if($this->reservationRepo->checkIfBandDateIsBusy($request)) return redirect()->back()->withErrors('Band is busy for current date.');
+        
+        $this->reservationRepo->update($reservation, $request);
+
+        return redirect()->route('customer.index');
     }
 }
