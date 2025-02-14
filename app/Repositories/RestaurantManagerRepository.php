@@ -2,20 +2,23 @@
 
 namespace App\Repositories;
 
+use App\Models\RestaurantImages;
 use App\Models\Restaurants;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantManagerRepository {
 
     private $restaurantModel;
+    private $resImagesModel;
     public function __construct() {
 
         $this->restaurantModel = new Restaurants();
+        $this->resImagesModel = new RestaurantImages();
     }
 
     public function store($request, $bcgPath, $imagePaths) {
 
-        $this->restaurantModel->create([
+        $restaurant = $this->restaurantModel->create([
 
             'user_id' => Auth::id(), 
             'name' => $request->name,
@@ -26,6 +29,14 @@ class RestaurantManagerRepository {
             'phone_number' => $request->phone_number,
             'address' => $request->address
         ]);
+
+        foreach($imagePaths as $imgPath) {
+            
+            $this->resImagesModel->create([
+                'restaurants_id' => $restaurant->id,
+                'image' => $imgPath,
+            ]);
+        }
     }
 
     public function checkAndAssignBcgPath($request, $repo) {
