@@ -42,7 +42,7 @@
                 </button>
             </form>
 
-            <form action="{{ route('manager.restaurant.deleteImage', $image->id) }}" method="POST">
+            <form action="{{ route('manager.band.deleteImage', $image->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
 
@@ -54,7 +54,7 @@
         </div>
     </div>
     @endforeach
-    <form action="{{ route('manager.restaurant.addImage', $band->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md border border-gray-200 w-full max-w-md">
+    <form action="{{ route('manager.band.addImage', $band->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md border border-gray-200 w-full max-w-md">
         @csrf
     
         <label class="block text-gray-700 font-medium mb-2">Upload Image</label>

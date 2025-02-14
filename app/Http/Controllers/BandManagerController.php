@@ -93,4 +93,26 @@ class BandManagerController extends Controller
         $image->save();
         return redirect()->back();
     }
+
+    public function deleteImage(BandImages $image) {
+
+        if($image->user_id !== Auth::id()) return redirect()->back();
+        
+        $image->delete();
+
+        return redirect()->back();
+    }
+
+    public function addImage(ValidateImage $request, Bands $restaurant) {
+
+        $imgPath = $this->bandRepo->checkAndAssignImgPath($request, 'bands');
+        BandImages::create([
+
+            'bands_id' => $restaurant->id,
+            'image' => $imgPath,
+            'user_id' => Auth::id()
+        ]);
+
+        return redirect()->back();
+    }
 }

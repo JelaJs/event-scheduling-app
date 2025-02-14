@@ -43,6 +43,8 @@ Route::controller(BandManagerController::class)->middleware(['auth', BandManager
     Route::delete('/delete/{band}', 'delete')->name('delete');
     Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
     Route::patch('/replace/{image}', 'replace')->name('replace');
+    Route::delete('/delete-image/{image}', 'deleteImage')->name('deleteImage');
+    Route::post('/create-image/{restaurant}', 'addImage')->name('addImage');
 });
 
 //CUSTOMER BOOKING
