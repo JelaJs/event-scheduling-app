@@ -54,8 +54,6 @@ class RestaurantManagerController extends Controller
 
         $this->restaurantRepo->checkAndUpdateRestaurantBcg($request, $restaurant, 'restaurants');
 
-        $this->restaurantRepo->checkAndUpdateImgPaths($request, $restaurant, 'restaurants');
-
         $this->restaurantRepo->fillAndSave($request, $restaurant);
 
         return redirect()->route('manager.restaurant.index');
