@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BandStoreAndUpdateRequest;
+use App\Http\Requests\ValidateImage;
+use App\Models\BandImages;
 use App\Models\Bands;
 use App\Models\Reservations;
 use App\Repositories\BandManagerRepository;
@@ -79,6 +81,16 @@ class BandManagerController extends Controller
         $reservation->band_status = $status;
         $reservation->save();
 
+        return redirect()->back();
+    }
+
+    public function replace(ValidateImage $request, BandImages $image) {
+
+        if($image->user_id !== Auth::id()) return redirect()->back();
+
+        $this->bandRepo->checkAndReplaceImage($request, $image, 'bands');
+
+        $image->save();
         return redirect()->back();
     }
 }

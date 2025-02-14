@@ -42,6 +42,7 @@ Route::controller(BandManagerController::class)->middleware(['auth', BandManager
     Route::patch('/update/{band}', 'update')->name('update');
     Route::delete('/delete/{band}', 'delete')->name('delete');
     Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
+    Route::patch('/replace/{image}', 'replace')->name('replace');
 });
 
 //CUSTOMER BOOKING
