@@ -44,7 +44,8 @@ class RestaurantsSeeder extends Seeder
                 'description' => $faker->text(100),
                 'instagram' => 'https://www.instagram.com/radnom_rest/',
                 'youtube' => 'https://www.youtube.com/@itmentorstva',
-                'phone_number' => $faker->phoneNumber()
+                'phone_number' => $faker->phoneNumber(),
+                'address' => $faker->address,
             ]);
         }
     }
