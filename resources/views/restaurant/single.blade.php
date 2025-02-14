@@ -21,11 +21,14 @@
 </div>
 
 <!-- Restaurant Images Section -->
-<div class="flex justify-center gap-4 mt-6 px-4">
-    <img src="{{ asset('storage/' . $restaurant->image_1) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-    <img src="{{ asset('storage/' . $restaurant->image_2) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-    <img src="{{ asset('storage/' . $restaurant->image_3) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
+<div class="flex flex-wrap justify-center gap-6 mt-6 px-4">
+    @foreach ($restaurant->images as $image)
+        <img src="{{ asset('storage/' . $image->image) }}" 
+             alt="Restaurant Image" 
+             class="w-64 h-64 object-cover rounded-xl shadow-lg border border-gray-300 hover:scale-105 transition duration-300">
+    @endforeach
 </div>
+
 
 <div class="bg-white p-6 rounded-lg shadow-md my-10">
     <p class="text-lg font-semibold text-gray-800 mb-3">Reserved Dates:</p>

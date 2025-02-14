@@ -6,8 +6,8 @@
         <div class="flex flex-wrap gap-6">
             @foreach ($restaurants as $restaurant)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full sm:w-1/2 lg:w-1/3">
-                    @if ($restaurant->image_1)
-                        <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $restaurant->image_1) }}" alt="">
+                    @if ($restaurant->background_image)
+                        <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $restaurant->background_image) }}" alt="">
                     @else
                         <img class="w-full h-48 object-cover" src="storage/uploads/restaurants/default.jpg" alt="">
                     @endif
