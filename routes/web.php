@@ -28,6 +28,8 @@ Route::controller(RestaurantManagerController::class)->middleware(['auth', Resta
     Route::delete('/delete/{restaurant}', 'delete')->name('delete');
     Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
     Route::patch('/replace/{image}', 'replace')->name('replace');
+    Route::delete('/delete-image/{image}', 'deleteImage')->name('deleteImage');
+    Route::post('/create-image/{restaurant}', 'addImage')->name('addImage');
 });
 
 

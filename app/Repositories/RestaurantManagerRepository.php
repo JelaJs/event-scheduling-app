@@ -97,4 +97,14 @@ class RestaurantManagerRepository {
             $tableRow->image = $request->file('image')->store("uploads/$repo", 'public');
         }
     }
+
+    public function checkAndAssignImgPath($request, $repo) {
+
+        if($request->hasFile('image')) {
+
+            return $request->file('image')->store("uploads/$repo", 'public');
+        }
+
+        return null;
+    }
 }

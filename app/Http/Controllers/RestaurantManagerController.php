@@ -94,4 +94,26 @@ class RestaurantManagerController extends Controller
         $image->save();
         return redirect()->back();
     }
+
+    public function deleteImage(RestaurantImages $image) {
+
+        if($image->user_id !== Auth::id()) return redirect()->back();
+        
+        $image->delete();
+
+        return redirect()->back();
+    }
+
+    public function addImage(ValidateImage $request, Restaurants $restaurant) {
+
+        $imgPath = $this->restaurantRepo->checkAndAssignImgPath($request, 'restauratns');
+        RestaurantImages::create([
+
+            'restaurants_id' => $restaurant->id,
+            'image' => $imgPath,
+            'user_id' => Auth::id()
+        ]);
+
+        return redirect()->back();
+    }
 }
