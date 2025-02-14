@@ -20,7 +20,7 @@ class RestaurantManagerController extends Controller
     
     public function index() {
 
-        $restaurant = Restaurants::with('reservations')->firstWhere('user_id', Auth::id());
+        $restaurant = Restaurants::with(['reservations', 'images'])->firstWhere('user_id', Auth::id());
 
         return view('manager.restaurant', ['restaurant' => $restaurant]);
     }

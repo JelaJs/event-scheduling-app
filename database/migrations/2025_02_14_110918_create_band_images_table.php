@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BandImages;
 use App\Models\Bands;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -10,7 +11,7 @@ return new class extends Migration
    
     public function up(): void
     {
-        Schema::create('band_images', function (Blueprint $table) {
+        Schema::create(BandImages::TABLE, function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Bands::class)->constrained()->cascadeOnDelete();
             $table->string('image');
@@ -20,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('band_images');
+        Schema::dropIfExists(BandImages::TABLE);
     }
 };

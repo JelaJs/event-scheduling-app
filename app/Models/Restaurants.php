@@ -27,4 +27,9 @@ class Restaurants extends Model
 
         return $this->hasMany(Reservations::class, 'restaurant_id', 'id');
     }
+
+    public function images() {
+
+        return $this->hasMany(RestaurantImages::class, 'restaurants_id', 'id');
+    }
 }

@@ -20,8 +20,25 @@
 </div>
 
 <!-- Restaurant Images Section -->
-<div class="flex justify-center gap-4 mt-6 px-4">
-    <img src="{{ asset('storage/' . $restaurant->image_1) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-    <img src="{{ asset('storage/' . $restaurant->image_2) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-    <img src="{{ asset('storage/' . $restaurant->image_3) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-</div>
+<div class="flex flex-wrap justify-center gap-6 mt-6 px-4">
+    @foreach ($restaurant->images as $image)
+     <div class="bg-white p-4 rounded-lg shadow-lg w-64">
+         <img src="{{ asset('storage/' . $image->image) }}" 
+              alt="Restaurant Image" 
+              class="w-full h-40 rounded-lg object-cover">
+ 
+         <div class="mt-4 flex justify-between gap-2">
+             <form action="">
+                 <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                     Update
+                 </button>
+             </form>
+             <form>
+                 <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                     Delete
+                 </button>
+             </form>
+         </div>
+     </div>
+    @endforeach
+ </div>

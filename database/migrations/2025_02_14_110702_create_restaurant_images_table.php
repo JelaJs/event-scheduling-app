@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RestaurantImages;
 use App\Models\Restaurants;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('restaurant_images', function (Blueprint $table) {
+        Schema::create(RestaurantImages::TABLE, function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Restaurants::class)->constrained()->cascadeOnDelete();
             $table->string('image');
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('restaurant_images');
+        Schema::dropIfExists(RestaurantImages::TABLE);
     }
 };
