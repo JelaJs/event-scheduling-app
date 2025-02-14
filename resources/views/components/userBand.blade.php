@@ -20,7 +20,7 @@
 
 <!-- Restaurant Images Section -->
 <div class="flex justify-center gap-4 mt-6 px-4">
-    <img src="{{ asset('storage/' . $band->image_1) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-    <img src="{{ asset('storage/' . $band->image_2) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
-    <img src="{{ asset('storage/' . $band->image_3) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
+    @foreach ($band->images as $image)
+        <img src="{{ asset('storage/' . $image->image) }}" alt="" class="w-1/3 rounded-lg shadow-md object-cover">
+    @endforeach
 </div>

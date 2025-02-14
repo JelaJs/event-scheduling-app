@@ -26,4 +26,9 @@ class Bands extends Model
 
         return $this->hasMany(Reservations::class, 'band_id', 'id');
     }
+
+    public function images() {
+
+        return $this->hasMany(BandImages::class, 'bands_id', 'id');
+    }
 }
