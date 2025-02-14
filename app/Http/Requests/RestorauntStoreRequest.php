@@ -20,15 +20,12 @@ class RestorauntStoreRequest extends FormRequest
             'name' => 'required|string|min:3|max:64',
             'background_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'description' => 'required|string|max:500',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'instagram' => ['nullable', 'string', 'max:256', 'regex:/^(https?:\/\/)?(www\.)?(instagram\.com)\/[A-Za-z0-9_.-]+\/?$/'],
             'youtube' => ['nullable', 'string', 'max:256', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com\/|youtu\.be\/)/'],
             'phone_number' => 'nullable|string|max:64',
             'address' => 'required|max:255'
         ];
     }
-
-    /*
-    'images' => 'nullable|array',
-    'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-    */
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RestorauntStoreRequest;
+use App\Http\Requests\ValidateImage;
 use App\Models\Reservations;
+use App\Models\RestaurantImages;
 use App\Models\Restaurants;
 use App\Repositories\RestaurantManagerRepository;
 use Illuminate\Http\Request;
@@ -80,6 +82,16 @@ class RestaurantManagerController extends Controller
         $reservation->restaurant_status = $status;
         $reservation->save();
 
+        return redirect()->back();
+    }
+
+    public function replace(ValidateImage $request, RestaurantImages $image) {
+
+        if($image->user_id !== Auth::id()) return redirect()->back();
+
+        $this->restaurantRepo->checkAndReplaceImage($request, $image, 'restaurants');
+
+        $image->save();
         return redirect()->back();
     }
 }

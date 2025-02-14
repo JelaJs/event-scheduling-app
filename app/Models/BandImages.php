@@ -14,5 +14,6 @@ class BandImages extends Model
     protected $fillable = [
         'bands_id',
         'image',
+        'user_id',
     ];
 }

@@ -22,23 +22,36 @@
 <!-- Restaurant Images Section -->
 <div class="flex flex-wrap justify-center gap-6 mt-6 px-4">
     @foreach ($restaurant->images as $image)
-     <div class="bg-white p-4 rounded-lg shadow-lg w-64">
-         <img src="{{ asset('storage/' . $image->image) }}" 
-              alt="Restaurant Image" 
-              class="w-full h-40 rounded-lg object-cover">
- 
-         <div class="mt-4 flex justify-between gap-2">
-             <form action="">
-                 <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-                     Update
-                 </button>
-             </form>
-             <form>
-                 <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
-                     Delete
-                 </button>
-             </form>
-         </div>
-     </div>
+    <div class="bg-white p-4 rounded-xl shadow-md w-72 border border-gray-200">
+        <img src="{{ asset('storage/' . $image->image) }}" 
+            alt="Restaurant Image" 
+            class="w-full h-44 rounded-lg object-cover shadow-sm">
+
+        <div class="mt-4 space-y-3">
+            <form action="{{ route('manager.restaurant.replace', $image->id) }}" method="POST" enctype="multipart/form-data" class="space-y-2">
+                @csrf
+                @method('PATCH')
+
+                <input 
+                    type="file" 
+                    name="image"
+                    class="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-white file:bg-blue-500 hover:file:bg-blue-600 transition"
+                >
+
+                <button class="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-200">
+                    Replace
+                </button>
+            </form>
+
+            <form action="{{ route('manager.restaurant.delete', $image->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button class="w-full px-4 py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-200">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </div>
     @endforeach
- </div>
+</div>

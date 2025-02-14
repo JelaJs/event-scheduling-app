@@ -27,6 +27,7 @@ Route::controller(RestaurantManagerController::class)->middleware(['auth', Resta
     Route::patch('/update/{restaurant}', 'update')->name('update');
     Route::delete('/delete/{restaurant}', 'delete')->name('delete');
     Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
+    Route::patch('/replace/{image}', 'replace')->name('replace');
 });
 
 

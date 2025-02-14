@@ -13,6 +13,7 @@ class RestaurantImages extends Model
     protected $fillable = [
         'restaurants_id',
         'image',
+        'user_id',
     ];
     
 }

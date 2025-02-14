@@ -35,6 +35,7 @@ class RestaurantManagerRepository {
             $this->resImagesModel->create([
                 'restaurants_id' => $restaurant->id,
                 'image' => $imgPath,
+                'user_id' => Auth::id()
             ]);
         }
     }
@@ -61,11 +62,11 @@ class RestaurantManagerRepository {
         }
     }
 
-    public function checkAndUpdateRestaurantBcg($request, $table, $repo) {
+    public function checkAndUpdateRestaurantBcg($request, $tableRow, $repo) {
 
         if($request->hasFile('background_image')) {
 
-            $table->background_image = $request->file('background_image')->store("uploads/$repo", 'public');
+            $tableRow->background_image = $request->file('background_image')->store("uploads/$repo", 'public');
         }
     }
 
@@ -87,5 +88,13 @@ class RestaurantManagerRepository {
         ]));
 
         $restaurant->save();
+    }
+
+    public function checkAndReplaceImage($request, $tableRow, $repo) {
+        
+        if($request->hasFile('image')) {
+
+            $tableRow->image = $request->file('image')->store("uploads/$repo", 'public');
+        }
     }
 }
