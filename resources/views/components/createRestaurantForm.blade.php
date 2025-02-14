@@ -23,7 +23,7 @@
         >
     </div>
     <div>
-        <label class="block text-gray-700 font-medium mb-2">Restourant Images (You can add 3 images)</label>
+        <label class="block text-gray-700 font-medium mb-2">Restourant Images</label>
         <input 
             type="file" 
             name="images[]" 

@@ -19,7 +19,7 @@ class RestorauntStoreRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:64',
             'background_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'images' => 'nullable|array|max:3',
+            'images' => 'nullable|array',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'description' => 'required|string|max:500',
             'instagram' => ['nullable', 'string', 'max:256', 'regex:/^(https?:\/\/)?(www\.)?(instagram\.com)\/[A-Za-z0-9_.-]+\/?$/'],
