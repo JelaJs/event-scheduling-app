@@ -40,29 +40,21 @@ class RestaurantManagerRepository {
         }
     }
 
-    public function checkAndAssignBcgPath($request, $repo) {
-
-        if($request->hasFile('background_image')) {
-
-            return $request->file('background_image')->store("uploads/$repo", 'public');
-        }
-
-        return null;
+    public function checkAndAssignBcgPath($request, string $repo){
+        
+        return $request->hasFile('background_image') ? $request->file('background_image')->store("uploads/$repo", 'public') : null;
     }
 
-    public function checkAndAssingImgPaths($request, &$imagePaths, $repo) {
+    public function checkAndAssignImgPaths($request, array &$imagePaths, string $repo): void {
 
         if ($request->hasFile('images')) {
-
             foreach ($request->file('images') as $image) {
-
-                $path = $image->store("uploads/$repo", 'public');
-                $imagePaths[] = $path;
+                $imagePaths[] = $image->store("uploads/$repo", 'public');
             }
         }
     }
 
-    public function checkAndUpdateRestaurantBcg($request, $tableRow, $repo) {
+    public function checkAndUpdateRestaurantBcg($request, $tableRow, string $repo) {
 
         if($request->hasFile('background_image')) {
 
@@ -79,21 +71,15 @@ class RestaurantManagerRepository {
         $restaurant->save();
     }
 
-    public function checkAndReplaceImage($request, $tableRow, $repo) {
+    public function checkAndReplaceImage($request, $tableRow, string $repo): void {
         
         if($request->hasFile('image')) {
-
             $tableRow->image = $request->file('image')->store("uploads/$repo", 'public');
         }
     }
 
-    public function checkAndAssignImgPath($request, $repo) {
+    public function checkAndAssignImgPath($request, string $repo){
 
-        if($request->hasFile('image')) {
-
-            return $request->file('image')->store("uploads/$repo", 'public');
-        }
-
-        return null;
+        return $request->hasFile('image') ? $request->file('image')->store("uploads/$repo", 'public') : null;
     }
 }

@@ -30,7 +30,7 @@ class BandManagerController extends Controller
         $bcgPath = $this->bandRepo->checkAndAssignBcgPath($request, 'bands');
 
         $imagePaths = [];
-        $this->bandRepo->checkAndAssingImgPaths($request, $imagePaths, 'bands');
+        $this->bandRepo->checkAndAssignImgPaths($request, $imagePaths, 'bands');
 
         $this->bandRepo->store($request, $bcgPath, $imagePaths);
 

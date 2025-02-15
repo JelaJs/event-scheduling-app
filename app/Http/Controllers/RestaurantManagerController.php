@@ -32,7 +32,7 @@ class RestaurantManagerController extends Controller
         $bcgPath = $this->restaurantRepo->checkAndAssignBcgPath($request, 'restaurants');
 
         $imagePaths = [];
-        $this->restaurantRepo->checkAndAssingImgPaths($request, $imagePaths, 'restaurants');
+        $this->restaurantRepo->checkAndAssignImgPaths($request, $imagePaths, 'restaurants');
 
         $this->restaurantRepo->store($request, $bcgPath, $imagePaths);
 
