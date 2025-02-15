@@ -26,7 +26,7 @@ class BandManagerController extends Controller
 
     public function store(BandStoreAndUpdateRequest $request) {
 
-        if(Bands::firstWhere('user_id', Auth::id())) return redirect()->route('home');
+        if($this->bandService->checkIfUserAlreadyHaveBand()) return redirect()->route('home');
 
         $bcgPath = $this->bandService->checkAndAssignBcgPath($request, 'bands');
 
@@ -39,14 +39,14 @@ class BandManagerController extends Controller
 
     public function edit(Bands $band) {
 
-        if($band->user_id !== Auth::id()) return redirect()->back();
+        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
 
         return view('manager.editBand', ['band' => $band]);
     }
 
     public function update(BandStoreAndUpdateRequest $request, Bands $band) {
 
-        if($band->user_id !== Auth::id()) return redirect()->back();
+        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
 
         $this->bandRepo->checkAndUpdateRestaurantBcg($request, $band, 'bands');
         $this->bandRepo->fillAndSaveBand($request, $band);
@@ -56,7 +56,7 @@ class BandManagerController extends Controller
 
     public function delete(Bands $band) {
 
-        if($band->user_id !== Auth::id()) return redirect()->back();
+        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
 
         $band->delete();
         return redirect()->back();
@@ -64,12 +64,12 @@ class BandManagerController extends Controller
 
     public function updateReservationStatus(Reservations $reservation, $status) {
 
-        if($reservation->band_status !== 'pending') return redirect()->back();
+        if(!$this->bandService->checkIfRestaurantOrBandReservationIsPending($reservation->band_status)) return redirect()->back();
 
-        if($status !== 'accepted' && $status !== 'rejected') return redirect()->back();
+        if(!$this->bandService->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
 
         $band = Bands::firstWhere('id', $reservation->band_id);
-        if($band->user_id !== Auth::id()) return redirect()->back();
+        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
 
         $reservation->band_status = $status;
         $reservation->save();
@@ -79,7 +79,7 @@ class BandManagerController extends Controller
 
     public function replace(ValidateImage $request, BandImages $image) {
 
-        if($image->user_id !== Auth::id()) return redirect()->back();
+        if(!$this->bandService->checkIfUserOwnsImage($image)) return redirect()->back();
 
         $this->bandRepo->checkAndReplaceImage($request, $image, 'bands');
         $image->save();
@@ -88,7 +88,7 @@ class BandManagerController extends Controller
 
     public function deleteImage(BandImages $image) {
 
-        if($image->user_id !== Auth::id()) return redirect()->back();
+        if(!$this->bandService->checkIfUserOwnsImage($image)) return redirect()->back();
         
         $image->delete();
         return redirect()->back();
