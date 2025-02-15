@@ -70,17 +70,6 @@ class RestaurantManagerRepository {
         }
     }
 
-    public function checkAndUpdateImgPaths($request, $tableRow, $repo) {
-
-        if ($request->hasFile('images')) {
-            $imagePaths = array_map(fn($image) => $image->store("uploads/$repo", 'public'), $request->file('images'));
-    
-            $tableRow->image_1 = $imagePaths[0] ?? $tableRow->image_1;
-            $tableRow->image_2 = $imagePaths[1] ?? $tableRow->image_2;
-            $tableRow->image_3 = $imagePaths[2] ?? $tableRow->image_3;
-        }
-    }
-
     public function fillAndSave($request, $restaurant) {
 
         $restaurant->fill($request->only([
