@@ -14,10 +14,8 @@ use Illuminate\Support\Facades\Auth;
 class RestaurantManagerController extends Controller
 {
 
-    private $restaurantRepo;
-    public function __construct() {
+    public function __construct(private RestaurantManagerRepository $restaurantRepo) {
 
-        $this->restaurantRepo = new RestaurantManagerRepository();
     }
     
     public function index() {

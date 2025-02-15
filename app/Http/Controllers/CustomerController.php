@@ -12,11 +12,8 @@ use Request;
 
 class CustomerController extends Controller
 {
-    
-    private $reservationRepo;
-    public function __construct() {
+    public function __construct(private ReservationRepository $reservationRepo) {
 
-        $this->reservationRepo = new ReservationRepository();
     }
 
     public function index() {

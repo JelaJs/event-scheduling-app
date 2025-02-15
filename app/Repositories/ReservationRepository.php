@@ -7,10 +7,8 @@ use Auth;
 
 class ReservationRepository {
 
-    private $reservationModel;
-    public function __construct() {
+    public function __construct(private Reservations $reservationModel) {
 
-        $this->reservationModel = new Reservations();
     }
 
     public function checkIfReservationExists($request) {

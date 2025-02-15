@@ -24,7 +24,7 @@
         >
     </div>
     <div>
-        <label class="block text-gray-700 font-medium mb-2">Band Images (You can add 3 images)</label>
+        <label class="block text-gray-700 font-medium mb-2">Band Images</label>
         <input 
             type="file" 
             name="images[]" 

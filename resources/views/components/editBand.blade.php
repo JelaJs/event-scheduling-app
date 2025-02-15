@@ -25,15 +25,6 @@
         >
     </div>
     <div>
-        <label class="block text-gray-700 font-medium mb-2">Bands Images (You can add 3 images)</label>
-        <input 
-            type="file" 
-            name="images[]" 
-            multiple
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm cursor-pointer bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-white file:bg-blue-500 hover:file:bg-blue-600"
-        >
-    </div>
-    <div>
         <label class="block text-gray-700 font-medium mb-2">Description *</label>
         <input 
             type="text" 

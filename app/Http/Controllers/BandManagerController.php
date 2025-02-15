@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class BandManagerController extends Controller
 {
+    public function __construct(private BandManagerRepository $bandRepo) {
 
-    private $bandRepo;
-    public function __construct() {
-
-        $this->bandRepo = new BandManagerRepository();
     }
 
     public function index() {
@@ -52,8 +49,6 @@ class BandManagerController extends Controller
         if($band->user_id !== Auth::id()) return redirect()->back();
 
         $this->bandRepo->checkAndUpdateRestaurantBcg($request, $band, 'bands');
-
-        $this->bandRepo->checkAndUpdateImgPaths($request, $band, 'bands');
 
         $this->bandRepo->fillAndSaveBand($request, $band);
 
