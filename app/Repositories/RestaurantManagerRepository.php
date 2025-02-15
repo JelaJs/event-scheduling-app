@@ -57,7 +57,6 @@ class RestaurantManagerRepository {
     public function checkAndUpdateRestaurantBcg($request, $tableRow, string $repo) {
 
         if($request->hasFile('background_image')) {
-
             $tableRow->background_image = $request->file('background_image')->store("uploads/$repo", 'public');
         }
     }

@@ -33,7 +33,6 @@ class BandManagerController extends Controller
         $this->bandRepo->checkAndAssignImgPaths($request, $imagePaths, 'bands');
 
         $this->bandRepo->store($request, $bcgPath, $imagePaths);
-
         return redirect()->back();
     }
 
@@ -49,7 +48,6 @@ class BandManagerController extends Controller
         if($band->user_id !== Auth::id()) return redirect()->back();
 
         $this->bandRepo->checkAndUpdateRestaurantBcg($request, $band, 'bands');
-
         $this->bandRepo->fillAndSaveBand($request, $band);
 
         return redirect()->route('manager.band.index');
@@ -60,7 +58,6 @@ class BandManagerController extends Controller
         if($band->user_id !== Auth::id()) return redirect()->back();
 
         $band->delete();
-
         return redirect()->back();
     }
 
@@ -84,7 +81,6 @@ class BandManagerController extends Controller
         if($image->user_id !== Auth::id()) return redirect()->back();
 
         $this->bandRepo->checkAndReplaceImage($request, $image, 'bands');
-
         $image->save();
         return redirect()->back();
     }
@@ -94,7 +90,6 @@ class BandManagerController extends Controller
         if($image->user_id !== Auth::id()) return redirect()->back();
         
         $image->delete();
-
         return redirect()->back();
     }
 
