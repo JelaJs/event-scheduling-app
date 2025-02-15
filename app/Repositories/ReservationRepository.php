@@ -13,46 +13,53 @@ class ReservationRepository {
 
     public function checkIfReservationExists($request) {
 
-        return $this->reservationModel->firstWhere([
+        $reservation = $this->reservationModel->firstWhere([
             ['customer_id', Auth::id()],
             ['reservation_date', $request->reservation_date]
         ]);
+
+        return $reservation ? true : false;
     }
 
     public function checkIfChangedReservationExists($request, $reservation) {
 
         if($reservation->restaurant_id !== $request->reservation_id || $reservation->band_id !== $request->band_id || $reservation->reservation_date !== $request->reservation_date) {
 
-            return $this->reservationModel->firstWhere([
+            $resrvation = $this->reservationModel->firstWhere([
                 ['customer_id', Auth::id()],
                 ['reservation_date', $request->reservation_date]
             ]);
+
+            return $resrvation ? true : false;
         }
     }
 
     public function checkIfRestaurantDateIsBusy($request) {
 
-        return $this->reservationModel->firstWhere([
+        $restaurantDate = $this->reservationModel->firstWhere([
             ['restaurant_id', $request->restaurant_id],
             ['reservation_date', $request->reservation_date],
             ['restaurant_status', 'approved'] 
         ]);
+
+        return $restaurantDate ? true : false;
     }
 
     public function checkIfBandDateIsBusy($request) {
 
-        return $this->reservationModel->firstWhere([
+        $bandDate = $this->reservationModel->firstWhere([
             ['band_id', $request->band_id],
             ['reservation_date', $request->reservation_date],
             ['band_status', 'approved'] 
         ]);
+
+        return $bandDate ? true : false;
     }
 
     public function checkIfStatusIsPending($reservation) {
 
-       if($reservation->restaurant_status == 'pending' && $reservation->band_status == 'pending') return true;
+       return $reservation->restaurant_status == 'pending' && $reservation->band_status == 'pending';
 
-       return false;
     }
 
     public function store($request) {
