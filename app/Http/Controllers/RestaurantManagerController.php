@@ -29,10 +29,10 @@ class RestaurantManagerController extends Controller
 
         if($this->restaurantService->checkIfUserAlreadyHaveRestaurant()) return redirect()->route('home');
 
-        $bcgPath = $this->restaurantRepo->checkAndAssignBcgPath($request, 'restaurants');
+        $bcgPath = $this->restaurantService->checkAndAssignBcgPath($request, 'restaurants');
 
         $imagePaths = [];
-        $this->restaurantRepo->checkAndAssignImgPaths($request, $imagePaths, 'restaurants');
+        $this->restaurantService->checkAndAssignImgPaths($request, $imagePaths, 'restaurants');
 
         $this->restaurantRepo->store($request, $bcgPath, $imagePaths);
         return redirect()->back();
@@ -98,7 +98,7 @@ class RestaurantManagerController extends Controller
 
     public function addImage(ValidateImage $request, Restaurants $restaurant) {
 
-        $imgPath = $this->restaurantRepo->checkAndAssignImgPath($request, 'restauratns');
+        $imgPath = $this->restaurantService->checkAndAssignImgPath($request, 'restauratns');
         RestaurantImages::create([
 
             'restaurants_id' => $restaurant->id,

@@ -8,12 +8,13 @@ use App\Models\BandImages;
 use App\Models\Bands;
 use App\Models\Reservations;
 use App\Repositories\BandManagerRepository;
+use App\Services\BandService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BandManagerController extends Controller
 {
-    public function __construct(private BandManagerRepository $bandRepo) {
+    public function __construct(private BandManagerRepository $bandRepo, private BandService $bandService) {
 
     }
 
@@ -27,10 +28,10 @@ class BandManagerController extends Controller
 
         if(Bands::firstWhere('user_id', Auth::id())) return redirect()->route('home');
 
-        $bcgPath = $this->bandRepo->checkAndAssignBcgPath($request, 'bands');
+        $bcgPath = $this->bandService->checkAndAssignBcgPath($request, 'bands');
 
         $imagePaths = [];
-        $this->bandRepo->checkAndAssignImgPaths($request, $imagePaths, 'bands');
+        $this->bandService->checkAndAssignImgPaths($request, $imagePaths, 'bands');
 
         $this->bandRepo->store($request, $bcgPath, $imagePaths);
         return redirect()->back();
@@ -95,7 +96,7 @@ class BandManagerController extends Controller
 
     public function addImage(ValidateImage $request, Bands $restaurant) {
 
-        $imgPath = $this->bandRepo->checkAndAssignImgPath($request, 'bands');
+        $imgPath = $this->bandService->checkAndAssignImgPath($request, 'bands');
         BandImages::create([
 
             'bands_id' => $restaurant->id,
