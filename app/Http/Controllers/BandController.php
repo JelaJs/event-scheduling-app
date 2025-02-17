@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bands;
-use Illuminate\Http\Request;
 
 class BandController extends Controller
 {

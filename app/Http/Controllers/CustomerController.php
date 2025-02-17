@@ -9,7 +9,6 @@ use App\Models\Restaurants;
 use App\Repositories\ReservationRepository;
 use App\Services\ReservationService;
 use Illuminate\Support\Facades\Auth;
-use Request;
 
 class CustomerController extends Controller
 {

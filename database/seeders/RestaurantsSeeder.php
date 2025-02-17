@@ -5,11 +5,7 @@ namespace Database\Seeders;
 use App\Models\Restaurants;
 use App\Models\User;
 use Faker\Factory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class RestaurantsSeeder extends Seeder
 {

@@ -9,7 +9,6 @@ use App\Models\RestaurantImages;
 use App\Models\Restaurants;
 use App\Repositories\RestaurantManagerRepository;
 use App\Services\RestaurantService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantManagerController extends Controller

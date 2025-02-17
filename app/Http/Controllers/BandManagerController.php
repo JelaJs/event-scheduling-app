@@ -9,7 +9,6 @@ use App\Models\Bands;
 use App\Models\Reservations;
 use App\Repositories\BandManagerRepository;
 use App\Services\BandService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BandManagerController extends Controller

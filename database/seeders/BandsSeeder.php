@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Bands;
 use App\Models\User;
 use Faker\Factory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BandsSeeder extends Seeder

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Reservations;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationRepository {
 
