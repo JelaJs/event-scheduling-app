@@ -25,12 +25,13 @@ class ReservationRepository {
 
         if($reservation->restaurant_id !== $request->reservation_id || $reservation->band_id !== $request->band_id || $reservation->reservation_date !== $request->reservation_date) {
 
-            $resrvation = $this->reservationModel->firstWhere([
+            $reservation = $this->reservationModel->firstWhere([
                 ['customer_id', Auth::id()],
-                ['reservation_date', $request->reservation_date]
+                ['reservation_date', $request->reservation_date],
+                ['id', '!=', $reservation->id]
             ]);
 
-            return $resrvation ? true : false;
+            return $reservation ? true : false;
         }
     }
 

@@ -41,6 +41,6 @@
     <!-- Submit Button -->
     <button type="submit" 
             class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200">
-        Make Reservation
+        Update Reservation
     </button>
 </form>
