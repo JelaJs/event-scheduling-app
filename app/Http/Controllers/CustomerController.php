@@ -38,13 +38,10 @@ class CustomerController extends Controller
         if($this->reservationRepo->checkIfBandDateIsBusy($request)) return redirect()->back()->withErrors('Band is busy for current date.');
         
         $this->reservationRepo->store($request);
-
         return redirect()->back();
     }
 
     public function edit(Reservations $reservation) {
-
-        if(!$this->reservationService->checkIfUserOwnsReservation($reservation)) return redirect()->back();
 
         $restaurants = Restaurants::all();
         $bands = Bands::all();
@@ -58,24 +55,18 @@ class CustomerController extends Controller
 
     public function update(MakeReservationRequest $request, Reservations $reservation) {
 
-        if(!$this->reservationService->checkIfUserOwnsReservation($reservation)) return redirect()->back();
-
         if(!$this->reservationRepo->checkIfStatusIsPending($reservation)) return redirect()->back()->withErrors("You can't make change at this point");
         if($this->reservationRepo->checkIfChangedReservationExists($request, $reservation)) return redirect()->back()->withErrors('You already have a reservation for the current date');
         if($this->reservationRepo->checkIfRestaurantDateIsBusy($request)) return redirect()->back()->withErrors('Restaurant is busy for current date');
         if($this->reservationRepo->checkIfBandDateIsBusy($request)) return redirect()->back()->withErrors('Band is busy for current date.');
         
         $this->reservationRepo->update($reservation, $request);
-
         return redirect()->route('customer.index');
     }
 
     public function delete(Reservations $reservation) {
 
-        if(!$this->reservationService->checkIfUserOwnsReservation($reservation)) return redirect()->back();
-
         $reservation->delete();
-
         return redirect()->back();
     }
 }

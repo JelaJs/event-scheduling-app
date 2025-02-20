@@ -52,9 +52,9 @@ Route::controller(CustomerController::class)->middleware(['auth', CustomerMiddle
 
     Route::get('/', 'index')->name('index');
     Route::post('/store', 'store')->name('store');
-    Route::get('edit/{reservation}', 'edit')->name('edit');
-    Route::patch('/update/{reservation}', 'update')->name('update');
-    Route::delete('/delete/{reservation}', 'delete')->name('delete');
+    Route::get('edit/{reservation}', 'edit')->name('edit')->can('edit-delete-reservation', 'reservation');
+    Route::patch('/update/{reservation}', 'update')->name('update')->can('edit-delete-reservation', 'reservation');
+    Route::delete('/delete/{reservation}', 'delete')->name('delete')->can('edit-delete-reservation', 'reservation');
 });
 
 ////////////////////////////////
