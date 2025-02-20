@@ -12,11 +12,6 @@ class RestaurantService {
         return Restaurants::firstWhere('user_id', Auth::id()) ? true : false;
     }
 
-    public function checkIfUserOwnsCurrentBandOrRestaurant($band_restaurant): bool {
-
-        return $band_restaurant->user_id == Auth::id();
-    }
-
     public function checkIfRestaurantOrBandReservationIsPending($reservationType): bool {
 
         return $reservationType === 'pending';

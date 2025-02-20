@@ -38,14 +38,10 @@ class BandManagerController extends Controller
 
     public function edit(Bands $band) {
 
-        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
-
         return view('manager.editBand', ['band' => $band]);
     }
 
     public function update(BandStoreAndUpdateRequest $request, Bands $band) {
-
-        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
 
         $this->bandRepo->checkAndUpdateRestaurantBcg($request, $band, 'bands');
         $this->bandRepo->fillAndSaveBand($request, $band);
@@ -54,8 +50,6 @@ class BandManagerController extends Controller
     }
 
     public function delete(Bands $band) {
-
-        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
 
         $band->delete();
         return redirect()->back();
@@ -68,7 +62,7 @@ class BandManagerController extends Controller
         if(!$this->bandService->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
 
         $band = Bands::firstWhere('id', $reservation->band_id);
-        if(!$this->bandService->checkIfUserOwnsCurrentBandOrRestaurant($band)) return redirect()->back();
+        if($band->user_id != Auth::id()) return redirect()->back();
 
         $reservation->band_status = $status;
         $reservation->save();

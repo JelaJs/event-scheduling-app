@@ -39,16 +39,12 @@ class RestaurantManagerController extends Controller
 
     public function edit(Restaurants $restaurant) {
 
-        if(!$this->restaurantService->checkIfUserOwnsCurrentBandOrRestaurant($restaurant)) return redirect()->back();
-
         return view('manager.editRestaurant', [
             'restaurant' => $restaurant
         ]);
     }
 
     public function update(RestorauntStoreRequest $request, Restaurants $restaurant) {
-
-        if(!$this->restaurantService->checkIfUserOwnsCurrentBandOrRestaurant($restaurant)) return redirect()->back();
 
         $this->restaurantRepo->checkAndUpdateRestaurantBcg($request, $restaurant, 'restaurants');
 
@@ -57,8 +53,6 @@ class RestaurantManagerController extends Controller
     }
 
     public function delete(Restaurants $restaurant) {
-
-        if(!$this->restaurantService->checkIfUserOwnsCurrentBandOrRestaurant($restaurant)) return redirect()->back();
 
         $restaurant->delete();
         return redirect()->back();
@@ -71,7 +65,7 @@ class RestaurantManagerController extends Controller
         if(!$this->restaurantService->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
 
         $restaurant = Restaurants::firstWhere('id', $reservation->restaurant_id);
-        if(!$this->restaurantService->checkIfUserOwnsCurrentBandOrRestaurant($restaurant)) return redirect()->back();
+        if($restaurant->user_id != Auth::id()) return redirect()->back();
 
         $reservation->restaurant_status = $status;
         $reservation->save();

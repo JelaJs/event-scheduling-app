@@ -23,9 +23,9 @@ Route::controller(RestaurantManagerController::class)->middleware(['auth', Resta
 
     Route::get('/', 'index')->name('index');
     Route::post('/store', 'store')->name('store');
-    Route::get('/edit/{restaurant}', 'edit')->name('edit');
-    Route::patch('/update/{restaurant}', 'update')->name('update');
-    Route::delete('/delete/{restaurant}', 'delete')->name('delete');
+    Route::get('/edit/{restaurant}', 'edit')->name('edit')->can('edit-delete-restaurant', 'restaurant');
+    Route::patch('/update/{restaurant}', 'update')->name('update')->can('edit-delete-restaurant', 'restaurant');
+    Route::delete('/delete/{restaurant}', 'delete')->name('delete')->can('edit-delete-restaurant', 'restaurant');
     Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
     Route::patch('/replace/{image}', 'replace')->name('replace');
     Route::delete('/delete-image/{image}', 'deleteImage')->name('deleteImage');
@@ -38,9 +38,9 @@ Route::controller(BandManagerController::class)->middleware(['auth', BandManager
 
     Route::get('/', 'index')->name('index');
     Route::post('/store', 'store')->name('store');
-    Route::get('/edit/{band}', 'edit')->name('edit');
-    Route::patch('/update/{band}', 'update')->name('update');
-    Route::delete('/delete/{band}', 'delete')->name('delete');
+    Route::get('/edit/{band}', 'edit')->name('edit')->can('edit-delete-band', 'band');
+    Route::patch('/update/{band}', 'update')->name('update')->can('edit-delete-band', 'band');
+    Route::delete('/delete/{band}', 'delete')->name('delete')->can('edit-delete-band', 'band');
     Route::get('/status/{reservation}/{status}', 'updateReservationStatus')->name('status');
     Route::patch('/replace/{image}', 'replace')->name('replace');
     Route::delete('/delete-image/{image}', 'deleteImage')->name('deleteImage');
