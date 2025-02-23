@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('band_id');
             $table->unsignedBigInteger('customer_id');
             $table->date('reservation_date');
-            $table->string('restaurant_status')->default('pending');
-            $table->string('band_status')->default('pending');
+            $table->string('restaurant_status')->default(Reservations::PENDING_STATUS);
+            $table->string('band_status')->default(Reservations::PENDING_STATUS);
             $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
