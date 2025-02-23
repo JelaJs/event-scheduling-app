@@ -36,4 +36,16 @@ class Reservations extends Model
 
         return $this->hasOne(Bands::class, 'id', 'band_id');
     }
+
+    public static function getApprovedStatus() {
+      return self::APPROVED_STATUS;
+    }
+
+    public static function getRejectedStatus() {
+      return self::REJECTED_STATUS;
+    }
+
+    public static function getPendingStatus() {
+      return self::PENDING_STATUS;
+    }
 }

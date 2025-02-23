@@ -1,3 +1,7 @@
+@php
+    $status = new App\Helper\Status();
+@endphp
+
 <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden my-10">
     <thead class="bg-gray-800 text-white">
         <tr>
@@ -19,13 +23,13 @@
                 <td class="px-6 py-4">{{$reservation->band->name}}</td>
                 <td class="px-6 py-4">{{$reservation->reservation_date}}</td>
                 <td class="px-6 py-4">
-                    <span class="px-3 py-1 text-sm font-medium rounded-full {{$reservation->band_status == 'pending' ? 'text-yellow-800 bg-yellow-200' : ' text-green-800 bg-green-200'}}">{{$reservation->band_status}}</span>
+                    <span class="px-3 py-1 text-sm font-medium rounded-full {{$reservation->band_status == $status->pending() ? 'text-yellow-800 bg-yellow-200' : ' text-green-800 bg-green-200'}}">{{$reservation->band_status}}</span>
                 </td>
                 <td class="px-6 py-4">
-                    <span class="px-3 py-1 text-sm font-medium rounded-full {{$reservation->restaurant_status == 'pending' ? 'text-yellow-800 bg-yellow-200' : ' text-green-800 bg-green-200'}}">{{$reservation->restaurant_status}}</span>
+                    <span class="px-3 py-1 text-sm font-medium rounded-full {{$reservation->restaurant_status == $status->pending() ? 'text-yellow-800 bg-yellow-200' : ' text-green-800 bg-green-200'}}">{{$reservation->restaurant_status}}</span>
                 </td>
                 <td class="px-6 py-4 text-center">
-                    @if($reservation->restaurant_status == 'pending' && $reservation->band_status == 'pending')
+                    @if($reservation->restaurant_status == $status->pending() && $reservation->band_status == $status->pending())
                         <a href="{{route('customer.edit', $reservation->id)}}" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">Update</a>
                     @else
                         <p>Disabled</p>

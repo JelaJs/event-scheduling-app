@@ -11,9 +11,4 @@ class ReservationService {
 
         Reservations::where('reservation_date', '<', date('Y-m-d'))->delete();
     }
-    
-    /*public function checkIfUserOwnsReservation($reservation) {
-
-        return $reservation->customer_id == Auth::id();
-    }*/
 }
