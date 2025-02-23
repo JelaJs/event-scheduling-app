@@ -20,8 +20,8 @@ class RestaurantManagerController extends Controller
     
     public function index() {
 
-        $restaurant = Restaurants::with(['reservations', 'images'])->firstWhere('user_id', Auth::id());
-        return view('manager.restaurant', ['restaurant' => $restaurant]);
+        return view('manager.restaurant', 
+        ['restaurant' => Restaurants::with(['reservations', 'images'])->firstWhere('user_id', Auth::id())]);
     }
 
     public function store(RestorauntStoreRequest $request) {
@@ -39,9 +39,7 @@ class RestaurantManagerController extends Controller
 
     public function edit(Restaurants $restaurant) {
 
-        return view('manager.editRestaurant', [
-            'restaurant' => $restaurant
-        ]);
+        return view('manager.editRestaurant', ['restaurant' => $restaurant]);
     }
 
     public function update(RestorauntStoreRequest $request, Restaurants $restaurant) {

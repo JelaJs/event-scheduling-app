@@ -9,9 +9,7 @@ class BandController extends Controller
     
     public function index() {
 
-        $bands = Bands::all();
-
-        return view('bands.all', ['bands' => $bands]);
+        return view('bands.all', ['bands' => Bands::all()]);
     }
 
     public function find(Bands $band) {

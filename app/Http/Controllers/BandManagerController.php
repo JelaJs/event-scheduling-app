@@ -18,9 +18,8 @@ class BandManagerController extends Controller
     }
 
     public function index() {
-
-        $band = Bands::firstWhere('user_id', Auth::id());
-        return view('manager.band', ['band' => $band]);
+        
+        return view('manager.band', ['band' => Bands::firstWhere('user_id', Auth::id())]);
     }
 
     public function store(BandStoreAndUpdateRequest $request) {

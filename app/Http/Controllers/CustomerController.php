@@ -21,13 +21,11 @@ class CustomerController extends Controller
         $this->reservationService->deleteReservationIfExpired();
 
         $reservations = Reservations::with('user', 'restaurant', 'band')->where('customer_id', Auth::id())->get();
-        $restaurants = Restaurants::all();
-        $bands = Bands::all();
 
         return view('customer.index', [
             'reservations' => $reservations,
-            'restaurants' => $restaurants,
-            'bands' => $bands
+            'restaurants' => Restaurants::all(),
+            'bands' => Bands::all(),
         ]);
     }
 
@@ -43,13 +41,10 @@ class CustomerController extends Controller
 
     public function edit(Reservations $reservation) {
 
-        $restaurants = Restaurants::all();
-        $bands = Bands::all();
-
         return view('customer.edit', [
             'reservation' => $reservation,
-            'restaurants' => $restaurants,
-            'bands' => $bands,
+            'restaurants' => Restaurants::all(),
+            'bands' => Bands::all(),
         ]);
     }
 

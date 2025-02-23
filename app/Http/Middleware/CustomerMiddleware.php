@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +13,6 @@ class CustomerMiddleware
     
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role === 'customer') {
-
-            return $next($request);
-        }
-
-        return redirect()->route('home');
+        return Auth::user()->role === User::CUSTOMER_ROLE ? $next($request) : redirect()->route('home');
     }
 }
