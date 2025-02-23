@@ -44,8 +44,6 @@ class BandManagerRepository extends RestaurantManagerRepository {
 
         $band->fill($request->only([
             'name', 'description', 'instagram', 'youtube', 'phone_number'
-        ]));
-
-        $band->save();
+        ]))->save();
     }
 }

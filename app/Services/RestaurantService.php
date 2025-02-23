@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Reservations;
 use App\Models\Restaurants;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +15,12 @@ class RestaurantService {
 
     public function checkIfRestaurantOrBandReservationIsPending($reservationType): bool {
 
-        return $reservationType === 'pending';
+        return $reservationType === Reservations::PENDING_STATUS;
     }
 
     public function checkIfPassedStatusIsCorrect(string $status): bool {
 
-        return $status === 'accepted' || $status === 'rejected';
+        return $status === Reservations::APPROVED_STATUS || $status === Reservations::REJECTED_STATUS;
     }
 
     public function checkIfUserOwnsImage($image): bool {

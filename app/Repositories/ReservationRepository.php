@@ -40,7 +40,7 @@ class ReservationRepository {
         $restaurantDate = $this->reservationModel->firstWhere([
             ['restaurant_id', $request->restaurant_id],
             ['reservation_date', $request->reservation_date],
-            ['restaurant_status', 'approved'] 
+            ['restaurant_status', Reservations::APPROVED_STATUS] 
         ]);
 
         return $restaurantDate ? true : false;
@@ -51,7 +51,7 @@ class ReservationRepository {
         $bandDate = $this->reservationModel->firstWhere([
             ['band_id', $request->band_id],
             ['reservation_date', $request->reservation_date],
-            ['band_status', 'approved'] 
+            ['band_status', Reservations::APPROVED_STATUS] 
         ]);
 
         return $bandDate ? true : false;
@@ -59,7 +59,7 @@ class ReservationRepository {
 
     public function checkIfStatusIsPending($reservation) {
 
-       return $reservation->restaurant_status == 'pending' && $reservation->band_status == 'pending';
+       return $reservation->restaurant_status == Reservations::PENDING_STATUS && $reservation->band_status == Reservations::PENDING_STATUS;
 
     }
 

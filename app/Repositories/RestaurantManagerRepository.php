@@ -51,9 +51,7 @@ class RestaurantManagerRepository {
 
         $restaurant->fill($request->only([
             'name', 'description', 'instagram', 'youtube', 'address', 'phone_number'
-        ]));
-
-        $restaurant->save();
+        ]))->save();
     }
 
     public function checkAndReplaceImage($request, $tableRow, string $repo): void {
@@ -62,6 +60,4 @@ class RestaurantManagerRepository {
             $tableRow->image = $request->file('image')->store("uploads/$repo", 'public');
         }
     }
-
-    
 }
