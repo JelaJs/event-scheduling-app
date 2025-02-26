@@ -10,7 +10,7 @@ class RestaurantService {
 
     public function checkIfUserAlreadyHaveRestaurant(): bool {
 
-        return Restaurants::firstWhere('user_id', Auth::id()) ? true : false;
+        return (bool) Restaurants::firstWhere('user_id', Auth::id());
     }
 
     public function checkIfRestaurantOrBandReservationIsPending($reservationType): bool {
