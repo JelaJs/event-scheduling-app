@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ReservationHelper;
 use App\Http\Requests\RestorauntStoreRequest;
 use App\Http\Requests\ValidateImage;
 use App\Models\Reservations;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class RestaurantManagerController extends Controller
 {
 
-    public function __construct(private RestaurantManagerRepository $restaurantRepo, private RestaurantService $restaurantService) {
+    public function __construct(private RestaurantManagerRepository $restaurantRepo, private RestaurantService $restaurantService, private ReservationHelper $resrevation) {
 
     }
     
@@ -60,7 +61,7 @@ class RestaurantManagerController extends Controller
 
         if(!$this->restaurantService->checkIfRestaurantOrBandReservationIsPending($reservation->restaurant_status)) return redirect()->back();
 
-        if(!$this->restaurantService->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
+        if(!$this->resrevation->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
 
         $restaurant = Restaurants::firstWhere('id', $reservation->restaurant_id);
         if($restaurant->user_id != Auth::id()) return redirect()->back();

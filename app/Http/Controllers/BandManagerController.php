@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ReservationHelper;
 use App\Http\Requests\BandStoreAndUpdateRequest;
 use App\Http\Requests\ValidateImage;
 use App\Models\BandImages;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BandManagerController extends Controller
 {
-    public function __construct(private BandManagerRepository $bandRepo, private BandService $bandService) {
+    public function __construct(private BandManagerRepository $bandRepo, private BandService $bandService, private ReservationHelper $resrevation) {
 
     }
 
@@ -58,7 +59,7 @@ class BandManagerController extends Controller
 
         if(!$this->bandService->checkIfRestaurantOrBandReservationIsPending($reservation->band_status)) return redirect()->back();
 
-        if(!$this->bandService->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
+        if(!$this->resrevation->checkIfPassedStatusIsCorrect($status)) return redirect()->back();
 
         $band = Bands::firstWhere('id', $reservation->band_id);
         if($band->user_id != Auth::id()) return redirect()->back();

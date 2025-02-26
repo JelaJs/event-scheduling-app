@@ -18,11 +18,6 @@ class RestaurantService {
         return $reservationType === Reservations::PENDING_STATUS;
     }
 
-    public function checkIfPassedStatusIsCorrect(string $status): bool {
-
-        return $status === Reservations::APPROVED_STATUS || $status === Reservations::REJECTED_STATUS;
-    }
-
     public function checkIfUserOwnsImage($image): bool {
 
         return $image->user_id == Auth::id();
