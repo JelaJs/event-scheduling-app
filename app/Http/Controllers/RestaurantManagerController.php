@@ -10,11 +10,13 @@ use App\Models\RestaurantImages;
 use App\Models\Restaurants;
 use App\Repositories\RestaurantManagerRepository;
 use App\Services\RestaurantService;
+use App\Traits\HandleUploads;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantManagerController extends Controller
 {
 
+    use HandleUploads;
     public function __construct(private RestaurantManagerRepository $restaurantRepo, private RestaurantService $restaurantService, private ReservationHelper $resrevation) {
 
     }
@@ -29,10 +31,10 @@ class RestaurantManagerController extends Controller
 
         if($this->restaurantService->checkIfUserAlreadyHaveRestaurant()) return redirect()->route('home');
 
-        $bcgPath = $this->restaurantService->checkAndAssignBcgPath($request, 'restaurants');
+        $bcgPath = $this->checkAndAssignBcgPath($request, 'restaurants');
 
         $imagePaths = [];
-        $this->restaurantService->checkAndAssignImgPaths($request, $imagePaths, 'restaurants');
+        $this->checkAndAssignImgPaths($request, $imagePaths, 'restaurants');
 
         $this->restaurantRepo->store($request, $bcgPath, $imagePaths);
         return redirect()->back();
@@ -90,7 +92,7 @@ class RestaurantManagerController extends Controller
 
     public function addImage(ValidateImage $request, Restaurants $restaurant) {
 
-        $imgPath = $this->restaurantService->checkAndAssignImgPath($request, 'restauratns');
+        $imgPath = $this->checkAndAssignImgPath($request, 'restauratns');
         RestaurantImages::create([
 
             'restaurants_id' => $restaurant->id,

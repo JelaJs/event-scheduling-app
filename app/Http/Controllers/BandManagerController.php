@@ -10,10 +10,12 @@ use App\Models\Bands;
 use App\Models\Reservations;
 use App\Repositories\BandManagerRepository;
 use App\Services\BandService;
+use App\Traits\HandleUploads;
 use Illuminate\Support\Facades\Auth;
 
 class BandManagerController extends Controller
 {
+    use HandleUploads;
     public function __construct(private BandManagerRepository $bandRepo, private BandService $bandService, private ReservationHelper $resrevation) {
 
     }
@@ -27,10 +29,10 @@ class BandManagerController extends Controller
 
         if($this->bandService->checkIfUserAlreadyHaveBand()) return redirect()->route('home');
 
-        $bcgPath = $this->bandService->checkAndAssignBcgPath($request, 'bands');
+        $bcgPath = $this->checkAndAssignBcgPath($request, 'bands');
 
         $imagePaths = [];
-        $this->bandService->checkAndAssignImgPaths($request, $imagePaths, 'bands');
+        $this->checkAndAssignImgPaths($request, $imagePaths, 'bands');
 
         $this->bandRepo->store($request, $bcgPath, $imagePaths);
         return redirect()->back();
@@ -89,7 +91,7 @@ class BandManagerController extends Controller
 
     public function addImage(ValidateImage $request, Bands $restaurant) {
 
-        $imgPath = $this->bandService->checkAndAssignImgPath($request, 'bands');
+        $imgPath = $this->checkAndAssignImgPath($request, 'bands');
         BandImages::create([
 
             'bands_id' => $restaurant->id,
