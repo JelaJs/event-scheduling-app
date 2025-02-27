@@ -2,12 +2,12 @@
 
 namespace App\Helper;
 
-use App\Models\Reservations;
+use App\ReservationStatus;
 
 class ReservationHelper {
 
     public function checkIfPassedStatusIsCorrect(string $status): bool {
 
-        return $status === Reservations::APPROVED_STATUS || $status === Reservations::REJECTED_STATUS;
+        return $status === ReservationStatus::APPROVED_STATUS->value || $status === ReservationStatus::REJECTED_STATUS->value;
     }
 }

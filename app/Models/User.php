@@ -12,10 +12,6 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    const BAND_MANAGER_ROLE = "band_manager";
-    const CUSTOMER_ROLE = "customer";
-    const RESTAURANT_MANAGER_ROLE = 'restaurant_manager';
-
     protected $fillable = [
         'name',
         'email',

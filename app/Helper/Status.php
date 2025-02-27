@@ -2,7 +2,7 @@
 
 namespace App\Helper;
 
-use App\Models\Reservations;
+use App\ReservationStatus;
 
 class Status {
 
@@ -10,16 +10,16 @@ class Status {
     //Sa njom ispisujem Constante unutar blade, prilikom if provera itd... Cini mi se da je ovako citljivije unutar blade pa bih ostavio
     public function pending(): string
     {
-        return Reservations::PENDING_STATUS;
+        return ReservationStatus::PENDING_STATUS->value;
     }
 
     public function approved(): string 
     {
-        return Reservations::APPROVED_STATUS;    
+        return ReservationStatus::APPROVED_STATUS->value;    
     }
 
     public function rejected(): string
     {
-        return Reservations::REJECTED_STATUS;
+        return ReservationStatus::REJECTED_STATUS->value;
     }
 }

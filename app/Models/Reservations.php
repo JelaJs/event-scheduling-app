@@ -8,9 +8,6 @@ class Reservations extends Model
 {
     const TABLE = 'reservations';
 
-    const PENDING_STATUS = 'pending';
-    const APPROVED_STATUS = 'approved';
-    const REJECTED_STATUS = 'rejected';
     protected $table = self::TABLE;
 
     protected $fillable = [

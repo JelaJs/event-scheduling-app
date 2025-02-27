@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+use App\UserRole;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +13,6 @@ class BandManagerMiddleware
    
     public function handle(Request $request, Closure $next): Response
     {
-        return Auth::user()->role === User::BAND_MANAGER_ROLE ? $next($request) : redirect()->route('home');
+        return Auth::user()->role === UserRole::BAND_MANAGER_ROLE->value ? $next($request) : redirect()->route('home');
     }
 }

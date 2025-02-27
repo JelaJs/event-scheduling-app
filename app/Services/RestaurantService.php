@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Reservations;
 use App\Models\Restaurants;
+use App\ReservationStatus;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantService {
@@ -15,7 +15,7 @@ class RestaurantService {
 
     public function checkIfRestaurantOrBandReservationIsPending($reservationType): bool {
 
-        return $reservationType === Reservations::PENDING_STATUS;
+        return $reservationType === ReservationStatus::PENDING_STATUS->value;
     }
 
     public function checkIfUserOwnsImage($image): bool {
