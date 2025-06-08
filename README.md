@@ -1,21 +1,77 @@
-## Zadatak:
+# Event Scheduling App
 
-Korisnik kada dodje na sajt moze da se registruje
--Prilikom registracije moze da bira da li zeli da bude customer, menadzer benda ili menadzer restorana
+## User Roles and Features
+Upon visiting the site, users can register and choose one of the following roles:
 
-Menadzer restorana ima mogucnost da doda jedan restoran.
--Prilikom kreiranja restorana moze dodati slike restorana, naziv, opis, instagram link, youtube link, broj telefona, adresu
--Nakon sto je restoran kreiram, korisnik ima mogucnost da edituje restoran kao i da ga u potpunosti obrise
--Korisik ima mogucnost da pogleda zahteve rezervacija za njegov restoran, koje moze da prihvati ili odbije
+Customer
 
-Band_manager ima mogucnost da doda jedan bend.
--Prilikom kreiranja benda moze dodati slike benda, naziv, opis, instagram link, youtube link, broj telefona
--Nakon sto je bend kreiram, korisnik ima mogucnost da edituje bend kao i da ga u potpunosti obrise
--Korisik ima mogucnost da pogleda zahteve rezervacija za njegov bend, koje moze da prihvati ili odbije
+Band Manager
 
-Customer ima mogucnost da rezervise bend i restoran za odredjen datum
--Korisnik ima mogucnost da napravi samo jednu rezervaciju po danu
--U slucaju da su restoran ili bend zauzeti za odredjen datum, korisnik nece moci da napravi rezervaciju
--Kada je rezervacija kreirana sve dok su status restorana i benda "pending" korisnik moze editovati. Moze menjati restoran, band i datum
--Ako neko (restoran ili bend) prihvati ili odbije rezervaciju, korisnik gubi mogucnost daljeg editovanja
--Sa druge strane opcija da obrise rezervaciju mu je dostupna u svakom trenutku
+Restaurant Manager
+
+## Restaurant Manager
+Can create one restaurant.
+
+When creating a restaurant, the following details can be added:
+
+Images
+
+Name
+
+Description
+
+Instagram link
+
+YouTube link
+
+Phone number
+
+Address
+
+After creating a restaurant, the user can:
+
+Edit the restaurant
+
+Delete the restaurant
+
+The restaurant manager can view reservation requests for their restaurant and either accept or decline them.
+
+## Band Manager
+Can create one band.
+
+When creating a band, the following details can be added:
+
+Images
+
+Name
+
+Description
+
+Instagram link
+
+YouTube link
+
+Phone number
+
+After creating a band, the user can:
+
+Edit the band
+
+Delete the band
+
+The band manager can view reservation requests for their band and either accept or decline them.
+
+## Customer
+Can make a reservation for a band and restaurant on a specific date.
+
+A customer can make only one reservation per day.
+
+If either the selected band or restaurant is already booked for that date, the reservation cannot be made.
+
+After creating a reservation:
+
+As long as the status of both the band and the restaurant is pending, the customer can edit the reservation (change the band, restaurant, or date).
+
+If either the band or the restaurant accepts or declines the reservation, the customer can no longer edit it.
+
+However, the customer can delete the reservation at any time, regardless of status.

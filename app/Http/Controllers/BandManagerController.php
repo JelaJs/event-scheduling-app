@@ -21,7 +21,7 @@ class BandManagerController extends Controller
     }
 
     public function index() {
-        
+
         return view('manager.band', ['band' => Bands::firstWhere('user_id', Auth::id())]);
     }
 
@@ -84,7 +84,7 @@ class BandManagerController extends Controller
     public function deleteImage(BandImages $image) {
 
         if(!$this->bandService->checkIfUserOwnsImage($image)) return redirect()->back();
-        
+
         $image->delete();
         return redirect()->back();
     }
